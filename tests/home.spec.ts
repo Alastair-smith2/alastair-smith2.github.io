@@ -3,7 +3,6 @@ import { test, expect } from "@playwright/test";
 test("homepage has title and header links", async ({ page }) => {
   await page.goto("http://localhost:4173");
 
-  // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Alastair Smith's blog/);
 
   const aboutLink = page.getByRole("link", { name: "About" });
