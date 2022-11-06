@@ -20,6 +20,7 @@
     "preview": "qwik build preview && vite preview --open",
     "serve": "echo 'Run \"npm run qwik add\" to install a server adaptor'",
     "start": "vite --open --mode ssr",
+    "deploy.prod": "npm run build.client && npm run build.server && gh-pages --dist dist --branch gh-pages",
     "test": "npx playwright test tests/home.spec.ts",
     "qwik": "qwik"
   },
@@ -38,6 +39,7 @@
     "autoprefixer": "10.4.11",
     "eslint": "8.26.0",
     "eslint-plugin-qwik": "0.12.1",
+    "gh-pages": "^4.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "node-fetch": "3.2.10",

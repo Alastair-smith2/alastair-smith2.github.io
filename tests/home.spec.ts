@@ -10,7 +10,6 @@ test("homepage has title and navigation links", async ({ page }) => {
   const postsLink = page.getByRole("link", { name: "Posts" });
   const homeLink = page.getByRole("link", { name: "Home" });
 
-  // Expect an attribute "to be strictly equal" to the value.
   await expect(homeLink).toHaveAttribute("href", "/");
   await expect(postsLink).toHaveAttribute("href", "/posts");
   await expect(aboutLink).toHaveAttribute("href", "/about");
