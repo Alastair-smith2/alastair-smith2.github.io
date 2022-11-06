@@ -20,14 +20,14 @@ export default component$(() => {
         <li>Programming paradigms (FP / OO)</li>
         <li>
           How various technologies are advancing (e.g. hydration / resumability
-          / islands in the frontend world,)
+          / islands in the frontend world)
         </li>
         <li>Distributed systems</li>
       </ul>
       <p class="text-slate-600 mt-6">Non programming wise, things I enjoy:</p>
       <ul class="mt-2 list-disc list-inside">
         <li>Games (board / video)</li>
-        <li>Casual competitive football</li>
+        <li>Football (AKA soccer)</li>
         <li>Cooking</li>
         <li>Walking</li>
         <li>Animals</li>
