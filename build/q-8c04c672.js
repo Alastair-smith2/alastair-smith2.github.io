@@ -1,0 +1,1 @@
+import{L as s}from"./q-b5fc732b.js";import{j as t,l as e,m as a}from"./q-e8c8d887.js";const h=r=>t("li",{children:t(s,{class:"text-sky-500 hover:text-sky-600",get href(){return r.post.href},children:e(r.post,"text"),[a]:{class:!0,href:e(r.post,"href")}})});export{h as s_na01ruK0I5k};
