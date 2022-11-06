@@ -1,0 +1,1 @@
+import{c as o,q as t,_,j as s}from"./q-ed9ddf31.js";const i=o(t(()=>_(()=>import("./q-1993ba5c.js"),["build/q-1993ba5c.js","build/q-be431702.js","build/q-ed9ddf31.js"]),"s_nyM1d8Bsk0c")),a=e=>s("ul",{class:"md:basis-1/3 flex flex-row",children:e.items.map(r=>s(i,{item:r}))});export{a as s_C1Ywzk9Lfds};

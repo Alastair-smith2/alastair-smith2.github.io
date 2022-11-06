@@ -1,1 +1,0 @@
-import{P as r}from"./q-c77973a3.js";import{j as s,F as m}from"./q-e8c8d887.js";import{k as i}from"./q-b5fc732b.js";const l=()=>{var o;const{menu:t}=i();return s(m,{children:[s("h2",{class:"text-2xl text-slate-600 mb-1",children:"Blog posts"}),(o=t==null?void 0:t.items)==null?void 0:o.map(e=>s(r,{item:e}))]})};export{l as s_c6ktmitUxfI};
