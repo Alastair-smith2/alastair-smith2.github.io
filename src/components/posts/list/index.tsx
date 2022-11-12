@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { useContent } from "@builder.io/qwik-city";
-import PostSection from "../post-section";
+import PostSection from "../section";
 
 export default component$(() => {
   const { menu } = useContent();

@@ -1,27 +1,22 @@
 import { component$ } from "@builder.io/qwik";
-import { DocumentHead, useContent, Link } from "@builder.io/qwik-city";
-import PostSection from "~/components/post-section";
+import { DocumentHead, useContent } from "@builder.io/qwik-city";
+import PostSection from "~/components/posts/section";
+import Link from "~/components/internal-link";
 
 export default component$(() => {
   const { menu } = useContent();
   return (
     <div class="mx-auto max-w-3xl">
       <p class="text-slate-600 mb-1">
-        Hey, I'm{" "}
-        <Link class="text-sky-500 hover:text-sky-600" href="/about">
-          Alastair
-        </Link>
-        , a software engineer based in the UK with a preference around business
-        logic. This blog will mainly be about technology but may occasionally
-        stray into other areas.
+        Hey, I'm <Link href="/about" text="Alastair" />, a software engineer
+        based in the UK. This blog will mainly be about programming but will
+        occasionally venture into other spheres.
       </p>
       <h2 class="text-3xl text-slate-600 mt-8">Recent blogs posts</h2>
       {menu && <PostSection item={menu} />}
-      <p class="mt-8">
-        <Link class="text-sky-500 hover:text-sky-600" href="/posts">
-          See all posts
-        </Link>
-      </p>
+      <div class="mt-8">
+        <Link text="See all posts" href="/posts" />
+      </div>
     </div>
   );
 });

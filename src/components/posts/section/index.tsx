@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { ContentMenu } from "@builder.io/qwik-city";
-import PostLink from "../post-link";
+import PostLink from "../link";
 
 export default component$((props: { item: ContentMenu }) => {
   return (
