@@ -1,1 +1,0 @@
-import{c as o,q as t,_ as e}from"./q-c90d5ca6.js";const _=o(t(()=>e(()=>import("./q-b88373a7.js"),["build/q-b88373a7.js","build/q-c90d5ca6.js"]),"s_ECiboYMa0N8")),a={title:"Posts"};export{_ as default,a as head};
