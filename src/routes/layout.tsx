@@ -4,9 +4,9 @@ import Header from "../components/header/header";
 
 export default component$(() => {
   return (
-    <div class="bg-sky-50 shadow-xl min-h-screen grid gap-2 grid-cols-1 grid-rows-1">
-      <main>
-        <Header />
+    <div class="bg-slate-900 min-h-screen grid gap-2 grid-cols-1 grid-rows-3">
+      <Header />
+      <main class="row-span-3">
         <section class="max-w-3xl mx-auto p-6">
           <Slot />
         </section>

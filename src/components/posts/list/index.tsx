@@ -6,7 +6,7 @@ export default component$(() => {
   const { menu } = useContent();
   return (
     <>
-      <h2 class="text-2xl text-slate-600 mb-1">Blog posts</h2>
+      <h2 class="text-3xl text-white mb-1">Blog posts</h2>
       {menu?.items?.map((section) => (
         <PostSection item={section} />
       ))}

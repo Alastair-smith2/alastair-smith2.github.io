@@ -10,10 +10,12 @@ export default component$(() => {
     { href: "/about", text: "About" },
   ];
   return (
-    <header class="flex flex-col md:flex-row md:justify-between p-6 md:mb-5 lg:mb-6">
-      <div class="md:basis-1/3">
+    <header class="flex flex-col sm:flex-row sm:justify-between p-6 sm:mb-5 lg:mb-6 row-end-1">
+      <div class="sm:basis-1/3">
         <Link href="/">
-          <h1 class="text-3xl text-slate-500">Alastair Smith</h1>
+          <h1 class="text-3xl text-emerald-700 hover:text-emerald-700">
+            Alastair Smith
+          </h1>
         </Link>
       </div>
       <MenuList items={items} />

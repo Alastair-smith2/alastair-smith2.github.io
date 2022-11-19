@@ -2,4 +2,4 @@
 
 ## November 2022
 
-- [So why a blog?](new-blog/index.mdx)
+- [New blog: Why and what it's built with.](new-blog/index.mdx)

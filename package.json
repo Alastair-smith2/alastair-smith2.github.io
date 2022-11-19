@@ -21,7 +21,7 @@
     "serve": "echo 'Run \"npm run qwik add\" to install a server adaptor'",
     "start": "vite --open --mode ssr",
     "deploy.prod": "npm run build.client && npm run build.server && gh-pages --dist dist --branch gh-pages",
-    "test": "npx playwright test tests/home.spec.ts",
+    "test": "npx playwright test tests/",
     "qwik": "qwik"
   },
   "lint-staged": {

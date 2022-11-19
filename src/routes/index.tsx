@@ -7,14 +7,15 @@ export default component$(() => {
   const { menu } = useContent();
   return (
     <div class="mx-auto max-w-3xl">
-      <p class="text-slate-600 mb-1">
+      <h2 class="text-3xl text-white">Welcome</h2>
+      <p class="text-white text-lg mt-6">
         Hey, I'm <Link href="/about" text="Alastair" />, a software engineer
         based in the UK. This blog will mainly be about programming but will
         occasionally venture into other spheres.
       </p>
-      <h2 class="text-3xl text-slate-600 mt-8">Recent blogs posts</h2>
+      <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
       {menu && <PostSection item={menu} />}
-      <div class="mt-8">
+      <div class="mt-6">
         <Link text="See all posts" href="/posts" />
       </div>
     </div>
