@@ -1,1 +1,0 @@
-import{j as e,i as s}from"./q-40712620.js";const o=()=>e("article",{class:"prose prose-headings:underline prose-a:text-sky-500 hover:prose-a:text-sky-600",children:e(s,{})});export{o as s_g62h5WKlB60};
