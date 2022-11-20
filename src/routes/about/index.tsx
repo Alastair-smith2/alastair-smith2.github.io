@@ -5,8 +5,9 @@ export default component$(() => {
   return (
     <>
       <h2 class="text-white text-3xl">
-        Hey, I'm Alastair, software engineer based in the UK
+        Hey, I'm Alastair, software engineer based in the UK.
       </h2>
+      <h3 class="text-xl text-emerald-700 mt-6">Some things about me.</h3>
       <p class="text-white text-lg mt-6">
         Programming wise, some of the items I find most interesting are:
       </p>
