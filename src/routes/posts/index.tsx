@@ -6,4 +6,10 @@ export default component$(() => <PostList />);
 
 export const head: DocumentHead = {
   title: "Posts",
+  meta: [
+    {
+      name: "description",
+      content: "List of posts by date",
+    },
+  ],
 };

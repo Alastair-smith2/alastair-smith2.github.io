@@ -48,4 +48,10 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title: "About",
+  meta: [
+    {
+      name: "description",
+      content: "About page containing information about Alastair",
+    },
+  ],
 };
