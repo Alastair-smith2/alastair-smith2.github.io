@@ -7,7 +7,6 @@ export default component$((props: { item: ContentMenu }) => {
   const showSingleCol = (props.item.items?.length ?? 0) <= 1;
   return (
     <>
-      {/* <h3 class="mt-6 text-xl text-emerald-500">{props.item.text}</h3> */}
       <Subheader text={props.item.text} />
       <ul
         class={`grid sm:grid-cols-${showSingleCol ? "1" : "2"} sm:grid-rows-${
