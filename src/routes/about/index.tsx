@@ -1,16 +1,18 @@
 import { component$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
+import Subheader from "~/components/subheader";
 
 export default component$(() => {
   return (
     <>
       <h2 class="text-white text-3xl">
-        Hey, I'm Alastair, software engineer based in the UK.
+        Hey, I'm Alastair, software engineer based in the UK
       </h2>
-      <h3 class="text-xl text-emerald-700 mt-6">Some things about me.</h3>
-      <p class="text-white text-lg mt-6">
-        Programming wise, some of the items I find most interesting are:
-      </p>
+      <Subheader
+        text={
+          "Programming wise, some of the items I find most interesting are:"
+        }
+      />
       <ul class="mt-2 list-disc list-inside">
         <li class="text-white">Rust</li>
         <li class="text-white">
@@ -27,9 +29,7 @@ export default component$(() => {
         </li>
         <li class="text-white">Distributed systems</li>
       </ul>
-      <p class="text-white text-lg mt-6">
-        Non programming wise, things I enjoy:
-      </p>
+      <Subheader text={"Non programming wise, things I enjoy:"} />
       <ul class="mt-2 list-disc list-inside">
         <li class="text-white">Games (board / video)</li>
         <li class="text-white">Football (AKA soccer)</li>

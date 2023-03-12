@@ -13,7 +13,7 @@ export default component$(() => {
     <header class="flex flex-col sm:flex-row sm:justify-between p-6 sm:mb-5 lg:mb-6 row-end-1">
       <div class="sm:basis-1/3">
         <Link href="/">
-          <h1 class="text-3xl text-emerald-700 hover:text-emerald-700">
+          <h1 class="text-3xl text-emerald-500 hover:text-emerald-300">
             Alastair Smith
           </h1>
         </Link>
