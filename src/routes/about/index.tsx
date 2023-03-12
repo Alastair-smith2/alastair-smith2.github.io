@@ -28,6 +28,7 @@ export default component$(() => {
           / islands in the frontend world)
         </li>
         <li class="text-white">Distributed systems</li>
+        <li class="text-white">Security</li>
       </ul>
       <Subheader text={"Non programming wise, things I enjoy:"} />
       <ul class="mt-2 list-disc list-inside">
