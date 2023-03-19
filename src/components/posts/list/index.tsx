@@ -8,7 +8,7 @@ export default component$(() => {
     <>
       <h2 class="text-3xl text-white mb-1">Blog posts</h2>
       {menu?.items?.map((section) => (
-        <PostSection item={section} />
+        <PostSection key={section.text} item={section} />
       ))}
     </>
   );

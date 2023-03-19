@@ -14,7 +14,7 @@ export default component$((props: { item: ContentMenu }) => {
         } gap-4 grid-cols-1 grid-rows-1`}
       >
         {props.item.items?.map((post) => (
-          <PostLink post={post} />
+          <PostLink key={post.text} post={post} />
         ))}
       </ul>
     </>
