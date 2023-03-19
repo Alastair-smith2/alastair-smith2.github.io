@@ -8,9 +8,9 @@ interface MenuProps {
 }
 export default component$<MenuProps>((props) => {
   return (
-    <ul class="sm:basis-1/2 md:basis-1/3 flex flex-row sm:justify-between">
+    <ul class="mt-3 sm:mt-0 sm:basis-1/2 md:basis-1/3 flex flex-row sm:justify-between">
       {props.items.map((item) => (
-        <MenuLink style={props.style ?? "link"} item={item} />
+        <MenuLink key={item.text} style={props.style ?? "link"} item={item} />
       ))}
     </ul>
   );

@@ -14,7 +14,7 @@ export default component$(() => {
         occasionally venture into other spheres.
       </p>
       <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
-      {menu && <PostSection item={menu} />}
+      {menu?.items && <PostSection item={menu.items[0]} />}
       <div class="mt-6">
         <Link text="See all posts" href="/posts" />
       </div>

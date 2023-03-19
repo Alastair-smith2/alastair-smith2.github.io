@@ -12,4 +12,6 @@ test("can navigate to entry from posts list", async ({ page }) => {
   const entry = page.getByText("New blog");
   await entry.click();
   await expect(page).toHaveTitle(/New blog/);
+  const blogTitle = page.getByRole("heading", { name: "So why a blog?" });
+  await expect(blogTitle).toBeVisible();
 });
