@@ -1,6 +1,6 @@
 {
-  "name": "my-qwik-basic-starter",
-  "description": "App with Routing built-in (recommended)",
+  "name": "alastairs-blog",
+  "description": "App built with qwik city",
   "engines": {
     "node": ">=15.0.0"
   },
@@ -20,7 +20,7 @@
     "preview": "qwik build preview && vite preview --open",
     "serve": "echo 'Run \"npm run qwik add\" to install a server adaptor'",
     "start": "vite --open --mode ssr",
-    "deploy.prod": "npm run build.client && npm run build.server && gh-pages --dist dist --branch gh-pages",
+    "build.prod": "npm run build.client && npm run build.server",
     "test": "npx playwright test tests/",
     "qwik": "qwik"
   },
