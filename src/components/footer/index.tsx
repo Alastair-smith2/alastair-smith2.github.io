@@ -16,7 +16,7 @@ export default component$(() => {
   return (
     <footer class="p-6 flex flex-col sm:flex-row sm:justify-between row-span-1">
       <p class="sm:basis-1/3 sm:flex sm:items-center text-emerald-500 mb-6 sm:mb-0">
-        2022 {dateInformation.date > 2022 ? `- ${dateInformation.date}` : null}
+        ©2022 {dateInformation.date > 2022 ? `- ${dateInformation.date}` : null}
       </p>
       <MenuList style="button" items={items} />
     </footer>
