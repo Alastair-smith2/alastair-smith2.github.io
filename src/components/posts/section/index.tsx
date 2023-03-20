@@ -9,9 +9,9 @@ export default component$((props: { item: ContentMenu }) => {
     <>
       <Subheader text={props.item.text} />
       <ul
-        class={`grid sm:grid-cols-${showSingleCol ? "1" : "2"} sm:grid-rows-${
-          showSingleCol ? "1" : "2"
-        } gap-4 grid-cols-1 grid-rows-1`}
+        class={`grid ${
+          showSingleCol ? "sm:grid-cols-1" : "sm:grid-cols-2"
+        } gap-8`}
       >
         {props.item.items?.map((post) => (
           <PostLink key={post.text} post={post} />
