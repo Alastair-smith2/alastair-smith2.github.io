@@ -6,7 +6,7 @@ export default component$(() => {
   return (
     <>
       <h2 class="text-white text-3xl">
-        Hey, I'm Alastair, software engineer based in the UK
+        Hey, I'm Alastair, a software engineer based in the UK
       </h2>
       <Subheader
         text={
