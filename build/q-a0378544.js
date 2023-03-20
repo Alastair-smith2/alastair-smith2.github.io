@@ -1,1 +1,0 @@
-import{a as e,m as t,j as r}from"./q-85ac1359.js";const o=()=>e("article",null,{class:"prose prose-h2:text-3xl prose-h3:text-2xl prose-h2:text-white prose-h3:text-white prose-p:text-lg prose-p:text-white prose-a:text-emerald-300 hover:prose-a:text-emerald-700 prose-li:text-white"},t(r,null,3,"a9_0"),1,"a9_1");export{o as s_g62h5WKlB60};
