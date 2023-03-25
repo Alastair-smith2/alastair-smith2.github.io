@@ -28,8 +28,8 @@
     "*.{ts,tsx}": "eslint --fix"
   },
   "devDependencies": {
-    "@builder.io/qwik": "0.23.0",
-    "@builder.io/qwik-city": "0.6.5",
+    "@builder.io/qwik": "0.24.0",
+    "@builder.io/qwik-city": "0.6.6",
     "@playwright/test": "^1.27.1",
     "@tailwindcss/typography": "^0.5.7",
     "@types/eslint": "8.4.8",
@@ -39,7 +39,6 @@
     "autoprefixer": "10.4.11",
     "eslint": "8.26.0",
     "eslint-plugin-qwik": "0.23.0",
-    "gh-pages": "^4.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "node-fetch": "3.2.10",
