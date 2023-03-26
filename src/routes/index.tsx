@@ -1,10 +1,12 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useContext } from "@builder.io/qwik";
 import { DocumentHead, useContent } from "@builder.io/qwik-city";
 import PostSection from "~/components/posts/section";
 import Link from "~/components/internal-link";
+import { DraftPostContext } from "~/root";
 
 export default component$(() => {
   const { menu } = useContent();
+  const showDraftPosts = useContext(DraftPostContext);
   return (
     <div class="mx-auto max-w-3xl">
       <h2 class="text-3xl text-white">Welcome</h2>
@@ -14,10 +16,18 @@ export default component$(() => {
         occasionally venture into other spheres.
       </p>
       <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
-      {menu?.items && <PostSection item={menu.items[0]} />}
-      <div class="mt-6">
-        <Link text="See all posts" href="/posts" />
-      </div>
+      {menu?.items && (
+        <>
+          <PostSection
+            mostRecentItemsOnly={true}
+            item={menu.items[0]}
+            showDrafts={showDraftPosts.showDraftPosts}
+          />
+          <div class="mt-6">
+            <Link text="See all posts" href="/posts" />
+          </div>
+        </>
+      )}
     </div>
   );
 });

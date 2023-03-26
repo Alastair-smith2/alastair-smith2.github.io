@@ -30,4 +30,7 @@ test("homepage has title and navigation links", async ({ page }) => {
     "href",
     "https://www.linkedin.com/in/alastair-smith-8b1819134"
   );
+
+  const blogPostHeadings = page.getByRole("heading", { level: 4 });
+  await expect(blogPostHeadings).toHaveCount(1);
 });
