@@ -4,14 +4,14 @@ import { JSX } from "@builder.io/qwik/jsx-runtime";
 import Subheader from "~/components/subheader";
 import PostLink from "../link";
 
-const MOST_RECENT_ITEM_COUNT = 3;
+const MOST_RECENT_ITEM_COUNT = 4;
 
 const getRelevantPosts = (
   items: ContentMenu[],
-  exludeDraftPosts: boolean
+  exlcudeDrafts: boolean
 ): JSX.Element[] =>
   items.reduce((acc: JSX.Element[], item): JSX.Element[] => {
-    if (exludeDraftPosts && item.text.includes("Draft")) {
+    if (item.text.includes("Draft") && exlcudeDrafts) {
       return acc;
     }
     acc.push(<PostLink key={item.text} post={item} />);
@@ -37,10 +37,10 @@ export default component$(
     }
 
     const showSingleCol = items.length <= 1;
-    const minimumPosts = items.slice(0, MOST_RECENT_ITEM_COUNT);
+    const allPublishedPosts = getRelevantPosts(items, !showDrafts);
     const posts = mostRecentItemsOnly
-      ? getRelevantPosts(minimumPosts, !showDrafts)
-      : getRelevantPosts(items, !showDrafts);
+      ? allPublishedPosts.slice(0, MOST_RECENT_ITEM_COUNT)
+      : allPublishedPosts;
     return (
       <>
         <Subheader text={props.item.text} />
