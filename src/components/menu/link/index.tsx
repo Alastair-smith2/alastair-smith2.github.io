@@ -9,7 +9,7 @@ interface MenuLinkProp {
 }
 
 export default component$<MenuLinkProp>((props) => {
-  const { pathname } = useLocation();
+  const { url } = useLocation();
   return (
     <li
       class={`sm:flex sm:justify-center basis-1/4 sm:basis-1/3 items-center ${
@@ -21,7 +21,7 @@ export default component$<MenuLinkProp>((props) => {
         target={props.item.href?.includes("https") ? "_blank" : undefined}
         rel="noopener noreferrer"
         class={`hover:text-emerald-700 text-white p-2
-        ${props.item.href === pathname && "underline underline-offset-1"} 
+        ${props.item.href == url.pathname && "underline underline-offset-1"} 
         ${
           props.style === "button" &&
           "rounded-full bg-emerald-700 hover:bg-white"

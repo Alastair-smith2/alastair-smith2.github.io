@@ -6,8 +6,8 @@ import { Link } from "@builder.io/qwik-city";
 export default component$(() => {
   const items: ContentMenu[] = [
     { href: "/", text: "Home" },
-    { href: "/posts", text: "Posts" },
-    { href: "/about", text: "About" },
+    { href: "/posts/", text: "Posts" },
+    { href: "/about/", text: "About" },
   ];
   return (
     <header class="flex flex-col sm:flex-row sm:justify-between p-6 sm:mb-5 lg:mb-6 row-end-1">
