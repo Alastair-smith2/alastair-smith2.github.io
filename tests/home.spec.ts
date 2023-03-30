@@ -14,8 +14,8 @@ test("homepage has title and navigation links", async ({
   const homeLink = page.getByRole("link", { name: "Home" });
 
   await expect(homeLink).toHaveAttribute("href", "/");
-  await expect(postsLink).toHaveAttribute("href", "/posts");
-  await expect(aboutLink).toHaveAttribute("href", "/about");
+  await expect(postsLink).toHaveAttribute("href", "/posts/");
+  await expect(aboutLink).toHaveAttribute("href", "/about/");
 
   const twitterLink = page.getByRole("link", { name: "Twitter" });
   const linkedInLink = page.getByRole("link", { name: "LinkedIn" });
