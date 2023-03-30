@@ -1,13 +1,16 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./axe-test";
 import { HOME_URL } from "./constants";
 
-test("homepage has title and navigation links", async ({ page }) => {
+test("homepage has title and navigation links", async ({
+  page,
+  makeAxeBuilder,
+}) => {
   await page.goto(HOME_URL);
 
   await expect(page).toHaveTitle(/Alastair Smith's blog/);
 
   const aboutLink = page.getByRole("link", { name: "About" });
-  const postsLink = page.getByRole("link", { name: "Posts" });
+  const postsLink = page.getByRole("link", { name: "Posts", exact: true });
   const homeLink = page.getByRole("link", { name: "Home" });
 
   await expect(homeLink).toHaveAttribute("href", "/");
@@ -33,4 +36,8 @@ test("homepage has title and navigation links", async ({ page }) => {
 
   const blogPostHeadings = page.getByRole("heading", { level: 4 });
   await expect(blogPostHeadings).toHaveCount(1);
+
+  const accessibilityScanResults = await makeAxeBuilder().analyze();
+
+  expect(accessibilityScanResults.violations).toEqual([]);
 });

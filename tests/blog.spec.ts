@@ -1,7 +1,10 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./axe-test";
 import { HOME_URL } from "./constants";
 
-test("can navigate to entry from posts list", async ({ page }) => {
+test("can navigate to entry from posts list", async ({
+  page,
+  makeAxeBuilder,
+}) => {
   await page.goto(`${HOME_URL}/posts`);
 
   await expect(page).toHaveTitle(/Posts/);
@@ -17,4 +20,6 @@ test("can navigate to entry from posts list", async ({ page }) => {
   await expect(page).toHaveTitle(/New blog/);
   const blogTitle = page.getByRole("heading", { name: "So why a blog?" });
   await expect(blogTitle).toBeVisible();
+  const accessibilityScanResults = await makeAxeBuilder().analyze();
+  expect(accessibilityScanResults.violations).toEqual([]);
 });

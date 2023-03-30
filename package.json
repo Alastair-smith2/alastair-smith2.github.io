@@ -28,9 +28,10 @@
     "*.{ts,tsx}": "eslint --fix"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.6.1",
     "@builder.io/qwik": "0.24.0",
     "@builder.io/qwik-city": "0.6.6",
-    "@playwright/test": "^1.27.1",
+    "@playwright/test": "^1.32.1",
     "@tailwindcss/typography": "^0.5.9",
     "@types/eslint": "8.4.8",
     "@types/node": "latest",
