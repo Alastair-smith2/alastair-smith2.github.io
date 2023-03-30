@@ -2,36 +2,55 @@
 title: New blog
 author: "Alastair Smith"
 description: Why a new blog?
-Date: 05/11/2022
+Date: 30/03/2022
 og:
-  - title: New blogging space
+  - title: New blog
     description: true
 ---
 
-import Post from "~/components/posts/post";
+import Post, { ArticleLink } from "~/components/posts/post";
 
 <Post>
 
-# Contents
+# A new blog
 
 1. [So why a blog?](#why)
 2. [What is this built with?](#technology)
 
 ## So why a blog?<a name="why"></a>
 
-Mainly because I've wanted a space for a long time that I can put down some thoughts
+Mainly because I've wanted a space for a while that I can put down some thoughts
 and occasionally cross share. Writing up about a topic is a great way to learn it.
 
-### What is this built with?<a name="technology"></a>
+## What is this built with?<a name="technology"></a>
 
-I wanted to use this as an opportunity to use some technology that I'd heard about, primarily the following:
+I wanted this to be an opportunity to use some technology that I've heard about and see what they were like for the most part. For those who are interested; it includes the following:
 
-1. [Qwik](https://qwik.builder.io/), which looks really promising in general. Specifically [resumability](https://qwik.builder.io/docs/concepts/resumable/) could truly change the JavaScript dicussion but time will tell as there's a lot going on in the community at the moment.
-2. [Tailwind](https://tailwindcss.com/), I hadn't intended to learn this, but I needed a CSS framework. I have seen people comment above how much they like Tailwind and now see why.
-3. [Playwright](https://playwright.dev/), I'd normally default to cypress for E2E testing in JS / TS but again had heard good things and given the recent announcement of [page.getBy\*](https://github.com/microsoft/playwright/releases/tag/v1.27.0) I thought I'd give a whirl.
-4. [Github pages](https://pages.github.com/) is a convenient way to host for free.
+1. <ArticleLink href="https://qwik.builder.io/" text="Qwik" />, which looks
+   really promising in general. Specifically <ArticleLink
+     href="https://qwik.builder.io/docs/concepts/resumable/"
+     text="resumability"
+   /> could truly change the JavaScript dicussion but time will tell as there's
+   a lot going on in the community at the moment.
+2. <ArticleLink href="https://tailwindcss.com/" text="Tailwind" />, I hadn't
+   intended to learn this, but I needed a CSS framework. I have seen people
+   comment above how much they like Tailwind and now see why.
+3. <ArticleLink href="https://playwright.dev/" text="Playwright" />, I'd
+   normally default to cypress for E2E testing in JS / TS but again had heard
+   good things and given the recent announcement of <ArticleLink
+     href="https://github.com/microsoft/playwright/releases/tag/v1.27.0"
+     text="page.getBy\*"
+   />
+   I thought I'd give a whirl. Getting
+   <ArticleLink
+     href="https://playwright.dev/docs/accessibility-testing"
+     text="axe-core"
+   /> integrated for _some_ automated accessibility testing was straight forward
+   as well.
+4. <ArticleLink href="https://pages.github.com/" text="Github pages" />, is a
+   convenient way to host for free.
 
-It's been nice to be able to leverage [Github actions](https://github.com/features/actions) to automate the build and deploy process.
+It's been nice to be able to leverage <ArticleLink href="https://github.com/features/actions" text="Github actions" /> to automate the build and deploy process.
 
 We'll see what else pops up on this space.
 

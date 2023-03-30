@@ -7,3 +7,13 @@ export default component$(() => {
     </article>
   );
 });
+
+export const ArticleLink = component$(
+  ({ href, text }: { href: string; text: string }) => {
+    return (
+      <a target="_blank" href={href}>
+        {text}
+      </a>
+    );
+  }
+);

@@ -6,7 +6,8 @@ export default component$(() => {
   return (
     <>
       <h2 class="text-white text-3xl">
-        Hey, I'm Alastair, a software engineer based in the UK
+        I'm Alastair, a software engineer based in the UK and currently working
+        as a Tech Lead
       </h2>
       <Subheader
         text={
@@ -14,7 +15,7 @@ export default component$(() => {
         }
       />
       <ul class="mt-2 list-disc list-inside">
-        <li class="text-white">Rust lang</li>
+        <li class="text-white">The Rust language</li>
         <li class="text-white">
           Other "challenger" languages (e.g. Go / Kotlin / WebAssembly)
         </li>

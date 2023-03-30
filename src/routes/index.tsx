@@ -11,9 +11,8 @@ export default component$(() => {
     <div class="mx-auto max-w-3xl">
       <h2 class="text-3xl text-white">Welcome</h2>
       <p class="text-white text-lg mt-6">
-        Hey, I'm <Link href="/about" text="Alastair" />, a software engineer
-        based in the UK. This blog will mainly be about programming but will
-        occasionally venture into other spheres.
+        Hey, I'm <Link href="/about" text="Alastair" />. This blog will mainly
+        be about programming but will occasionally venture into other spheres.
       </p>
       <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
       {menu?.items && (
