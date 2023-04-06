@@ -1,5 +1,6 @@
 import { component$, useContext } from "@builder.io/qwik";
-import { DocumentHead, useContent } from "@builder.io/qwik-city";
+import type { DocumentHead } from "@builder.io/qwik-city";
+import { useContent } from "@builder.io/qwik-city";
 import PostSection from "~/components/posts/section";
 import Link from "~/components/internal-link";
 import { DraftPostContext } from "~/root";

@@ -27,7 +27,7 @@ export default component$(() => {
    * Dont remove the `<head>` and `<body>` elements.
    */
   useStyles$(globalStyles);
-  const draftPostStore = useSignal<DraftPostStatus>({ showDraftPosts: true });
+  const draftPostStore = useSignal<DraftPostStatus>({ showDraftPosts: false });
   useContextProvider(DraftPostContext, draftPostStore.value);
 
   return (
