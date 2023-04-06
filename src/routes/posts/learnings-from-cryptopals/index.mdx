@@ -1,18 +1,18 @@
 ---
-title: Some learnings from cryptopals
+title: Learnings from cryptopals
 author: "Alastair Smith"
-description: Some lessons learnt from doing the cryptopal challenge
+description: Some lessons learnt from doing the cryptopals challenge
 # Date: 20/03/2023
 og:
-  - title: Some lessons learnt from doing the cryptopal challenge
+  - title: Some lessons learnt from doing the cryptopals challenge
     description: true
 ---
 
-import Post from "~/components/posts/post";
+import Post, { ArticleLink } from "~/components/posts/post";
 
 <Post>
 
-# Contents
+# Learnings from cryptopals
 
 1. [What makes a good cryptographic algorithm](#trapdoor)
 2. [Why current crytopgprahic algorithms are secure, for now](#secure-for-now)
@@ -20,15 +20,21 @@ import Post from "~/components/posts/post";
 4. [Diffie-Hellman](#diffie-hellman)
 5. [Summary](#summary)
 
-From first glance people could be mistaken for thinking somehow this is related to “crypto” in the sense of cryptocurrency. Rather it’s about lessons learnt about cryptography while doing some of the challenges from [https://cryptopals.com/](https://cryptopals.com/) and wider reading in wanting to expand my understanding of cryptography.
+<ArticleLink text="" href="" />
+From first glance people could be mistaken for thinking somehow this is related to
+cryptocurrency. Rather it’s about a few lessons learnt on cryptography while doing
+some of the challenges from <ArticleLink
+  text="https://cryptopals.com/"
+  href="https://cryptopals.com/"
+/> and wider reading in wanting to expand my understanding of cryptography.
 
-## What makes a suitable cryptographic algorithm, a “trapdoor”.<a name="trapdoor"></a>
+## What makes a suitable cryptographic algorithm, the “trapdoor” effect.<a name="trapdoor"></a>
 
-The majority of cryptographic algorithms in play today that are regarded as relatively secure (e.g. [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>), [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)) have the element of being like a “trapdoor”. [Trapdoor functions](https://en.wikipedia.org/wiki/Trapdoor_function) are named as such because it’s easy to produce a result in one direction, but difficult to produce the inverse.
+The majority of cryptographic algorithms in play today that are regarded as relatively secure (e.g. <ArticleLink text="RSA" href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)"/>, <ArticleLink text="ECDSA" href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm"/> ) have the element of being like a “trapdoor”. <ArticleLink text="Trapdoor functions" href="https://en.wikipedia.org/wiki/Trapdoor_function" /> are named as such because they're easy to produce a result in one direction, but difficult to produce the inverse without some secret information.
 
 ## Why cryptographic solutions widely used today are secure, for now.<a name="secure-for-now"></a>
 
-Following on from the above, many of the current “trapdoor functions” leverage integer [factorization](https://en.wikipedia.org/wiki/Integer_factorization), RSA being the prime example. Though in recent times elliptic curves have become a popular alternative where the “trapdoor” relies upon computing discrete logarithms, [https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/) is an excellent resource on the inner workings and the contrast to factorization. The key point here with these approaches is that current computers do not have sufficient power to produce the inverse in a reasonable time frame. However that’s likely to change in the future as outlined in [https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/](https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/), with quantum computers in the works, there is a very real need to start creating algorithms that are post-quantum proof. For those interested, [https://blog.cloudflare.com/nist-post-quantum-surprise/](https://blog.cloudflare.com/nist-post-quantum-surprise/) is a great discussion of some of the current challenges around post-quantum cryptography and some of the algorithms that are looking to be standardised.
+Following on from the above, many of the current “trapdoor functions” leverage <ArticleLink text="integer factorization" href="https://en.wikipedia.org/wiki/Integer_factorization"/>, RSA being the prime example. Though in recent times elliptic curves have become a popular alternative that leverage computing discrete logarithms, <ArticleLink text="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/" href="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/"/> is an excellent resource on the inner workings and the contrast to factorization. The key point here with these approaches is that current computers do not have sufficient power to produce the inverse in a reasonable time frame. However that’s likely to change in the future with quantum computers as outlined in [https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/](https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/), there is a very real need to start creating algorithms that are post-quantum proof. For those interested, [https://blog.cloudflare.com/nist-post-quantum-surprise/](https://blog.cloudflare.com/nist-post-quantum-surprise/) is a great discussion of some of the current challenges around post-quantum cryptography and some of the algorithms that are looking to be standardised.
 
 ## It’s amazingly simple to shoot yourself in the foot with cryptography algorithms<a name="difficult"></a>
 
@@ -36,18 +42,18 @@ There are some truly ingenious ways to break cryptographic algorithms, on the cr
 
 > If you're not that familiar with crypto already, or if your familiarity comes mostly from things like Applied Cryptography, this fact may surprise you: most crypto is fatally broken. The systems we're relying on today that aren't known to be fatally broken are in a state of just waiting to be fatally broken. Nobody is sure that TLS 1.2 or SSH 2 or OTR are going to remain safe as designed.
 
-and given some of the attacks that are walked, it’s understandable why the more disconcerting statement is also made:
+and given some of the attacks that are walked through, it’s understandable why the more disconcerting statement is also made:
 
 > Counting is not a hard problem. But cryptography is. There are just a few things you can screw up to get the size of a buffer wrong. There are tens, probably hundreds, of obscure little things you can do to take a cryptosystem that should be secure even against an adversary with more CPU cores than there are atoms in the solar system, and make it solveable with a Perl script and 15 seconds. Don't take our word for it: do the challenges and you'll see.
 
-Some of the ways aren’t obvious until working through the challenges, [even little clues like a server response taking slightly longer based on encryption/ decryption flow have been used to decrypt ciphertexts](https://en.wikipedia.org/wiki/Padding_oracle_attack), although thankfully that attack method isn’t as widely susceptible nowadays.
+Some of the ways aren’t obvious until working through the challenges, [even little clues like a server response taking slightly longer based on encryption/ decryption flow have been used to decrypt ciphertexts](https://en.wikipedia.org/wiki/Padding_oracle_attack), although thankfully that attack method isn’t as widely susceptible nowadays. An easy mistake is reusing an initialisation vector (IV) that needs to be unique so the repeat encryption of identical plaintext results in different ciphertexts. If an IV is reused it's possible to identify plaintext by repeated patterns. Another mistake is leveraging a MAC-then-Encrypt approach, in this scenario there's no guarantee on the integrity of the ciphertext furthermore it's susceptible to timing attacks as seen <ArticleLink href="https://en.wikipedia.org/wiki/Lucky_Thirteen_attack" text="in an attack against TLS" />. The general guidance here is always encrypt-then-mac, <ArticleLink href="https://crypto.stackexchange.com/questions/202/should-we-mac-then-encrypt-or-encrypt-then-mac" text="this stack exchange post"/> gives a good overview.
 
 ## Implementing Diffie-Hellman<a name="diffie-hellman"></a>
 
-This is the activity I enjoyed most, albeit one of the more simpler challenges. The problem around factorization really sunk in while learning about modpow in [Rust](https://docs.rs/num-bigint/latest/num_bigint/struct.BigUint.html#method.modpow).
+This is the activity I enjoyed most, albeit one of the more simpler challenges. As an algorithm it paved a way for exchanging crytographic keys for parties who may never have had contact before and establish a joint secret key. I enjoyed learning how modpow works and how to utilise it in [Rust](https://docs.rs/num-bigint/latest/num_bigint/struct.BigUint.html#method.modpow). Wikipedia have an excellent diagram that visualises the process: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Diffie-Hellman_Key_Exchange.svg/250px-Diffie-Hellman_Key_Exchange.svg.png" style="background-color: white; margin: 2rem auto;"/>
 
 ## Summary<a name="summary"></a>
 
-I really enjoyed (and found very frustrating at points) some of the cryptopals challenges, I would like to say I’ve learned some of the fundamentals of how different algorithms worked and more importantly why they’re considered fit for purpose (or not). There are still many elements (e.g. the inner workings of elliptic curves) that I wouldn’t say I’m comfortable with but I have a lot more working knowledge than I did when I started cryptopals. I ran into a situation recently where a NodeJS upgrade actually highlighted the use of a no longer fit for purpose algorithm in a system. Furthermore while considering solutions it was found that one of options (very quickly discounted given the following) actually rolled their own JavaScript version of an algorithm that is no longer considered fit for purpose in OpenSSL 3... It was nice to see something learned out of interest came in very practical.
+I really enjoyed (and found very frustrating at points) some of the cryptopals challenges, I would like to say I’ve learned some of the fundamentals of how different algorithms worked and more importantly why they’re considered fit for purpose (or not). There are still many elements (e.g. the inner workings of elliptic curves) that I wouldn’t say I’m comfortable with but I have a lot more working knowledge than I did when I started cryptopals. I ran into a situation recently where a NodeJS upgrade actually highlighted the use of a no longer fit for purpose algorithm in a system. Furthermore while considering solutions it was found that one of options (very quickly discounted given the following) actually rolled their own JavaScript version of an algorithm that is no longer considered fit for purpose in OpenSSL 3... It was very rewarding to have a deeper understanding of why and being able to leverage it.
 
 </Post>
