@@ -1,5 +1,5 @@
 import { component$, useStore } from "@builder.io/qwik";
-import { ContentMenu } from "@builder.io/qwik-city";
+import type { ContentMenu } from "@builder.io/qwik-city";
 import MenuList from "../menu/list";
 
 export default component$(() => {

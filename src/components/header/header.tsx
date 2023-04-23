@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { ContentMenu } from "@builder.io/qwik-city";
+import type { ContentMenu } from "@builder.io/qwik-city";
 import MenuList from "../menu/list";
 import { Link } from "@builder.io/qwik-city";
 

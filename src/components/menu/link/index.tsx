@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import { ContentMenu, Link, useLocation } from "@builder.io/qwik-city";
+import type { ContentMenu } from "@builder.io/qwik-city";
+import { Link, useLocation } from "@builder.io/qwik-city";
 
 export type Style = "button" | "link";
 
