@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { Link } from "@builder.io/qwik-city";
 
 export default component$(() => {
   return (
@@ -11,14 +10,14 @@ export default component$(() => {
       </p>
       <p class="text-white text-lg mt-6">
         If you think it should,{" "}
-        <Link
+        <a
           target="_blank"
           rel="noopener noreferrer"
           class="text-emerald-500 hover:text-emerald-300"
           href="https://twitter.com/alastair_smith2"
         >
           please reach out to me.
-        </Link>
+        </a>
       </p>
     </div>
   );
