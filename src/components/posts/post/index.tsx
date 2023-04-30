@@ -11,7 +11,7 @@ export default component$(() => {
 export const ArticleLink = component$(
   ({ href, text }: { href: string; text: string }) => {
     return (
-      <a target="_blank" href={href}>
+      <a target="_blank" rel="noopener noreferrer" href={href}>
         {text}
       </a>
     );

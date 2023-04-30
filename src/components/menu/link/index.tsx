@@ -9,6 +9,7 @@ interface MenuLinkProp {
   style: Style;
 }
 
+// TODO dedupe the styling here
 export default component$<MenuLinkProp>((props) => {
   const { url } = useLocation();
   return (
@@ -18,19 +19,33 @@ export default component$<MenuLinkProp>((props) => {
         "transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
       }`}
     >
-      <Link
-        target={props.item.href?.includes("https") ? "_blank" : undefined}
-        rel="noopener noreferrer"
-        class={`hover:text-emerald-700 text-white p-2
+      {props.item.href?.includes("https") ? (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`hover:text-emerald-700 text-white p-2
         ${props.item.href == url.pathname && "underline underline-offset-1"} 
         ${
           props.style === "button" &&
           "rounded-full bg-emerald-700 hover:bg-white"
         } `}
-        href={props.item.href}
-      >
-        {props.item.text}
-      </Link>
+          href={props.item.href}
+        >
+          {props.item.text}
+        </a>
+      ) : (
+        <Link
+          class={`hover:text-emerald-700 text-white p-2
+        ${props.item.href == url.pathname && "underline underline-offset-1"} 
+        ${
+          props.style === "button" &&
+          "rounded-full bg-emerald-700 hover:bg-white"
+        } `}
+          href={props.item.href}
+        >
+          {props.item.text}
+        </Link>
+      )}
     </li>
   );
 });
