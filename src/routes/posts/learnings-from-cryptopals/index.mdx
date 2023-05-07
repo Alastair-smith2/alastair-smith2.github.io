@@ -15,66 +15,103 @@ import Post, { ArticleLink } from "~/components/posts/post";
 # Learnings from cryptopals
 
 1. [What is cryptopals?](#cryptopals)
-2. [What makes a good cryptographic algorithm](#trapdoor)
-3. [Why current crytopgprahic algorithms are secure, for now](#secure-for-now)
-4. [It's incredibly easy to make mistakes](#difficult)
-5. [Diffie-Hellman](#diffie-hellman)
-6. [Summary](#summary)
+2. [What makes a good cryptographic algorithm?](#trapdoor)
+3. [Diffie-Hellman](#diffie-hellman)
+4. [Integer factorisation](#integer-factorisation)
+5. [Elliptic curve discrete logarithm problem](#ecdlp)
+6. [Why current crytopgprahic algorithms are secure - for now](#secure-for-now)
+7. [Insecure randomness](#insecure-randomness)
+8. [Summary](#summary)
 
-## What is cryptopals?<a name="cryptopals"/>
+## What is cryptopals? <a name="cryptopals"></a>
 
-<ArticleLink text="" href="" />
-At first glance people could be mistaken for thinking this post is going to be related
-to cryptocurrency. <ArticleLink
-  text="Cryptopals"
-  href="https://cryptopals.com/"
-/> is a series of challenges that relate to cryptography. Cryptogprahy is essential
-to the modern internet, it helps provides security by preventing others from intercepting
-secure communication. The challenges are intended to be a way to learn more about
-cryptography by giving problems that show how real world attacks work. This post
-is a selective list of learnings from the challenges and wider reading.
+At first glance people could be mistaken for thinking this post is going to be related to cryptocurrency, but that is not the case. [Cryptopals](https://cryptopals.com/) is a series of challenges that relate to cryptography. Cryptogprahy is essential to the modern internet; it helps provide security by preventing others from intercepting communication that is intended to be private and is fundamental to efforts like [ending the need for passwords.](https://blog.google/technology/safety-security/the-beginning-of-the-end-of-the-password/) The challenges on cryptopals help you learn about cryptography by providing problems that demonstrate how real-world attacks work against various algorithms. This post is some of my learnings from the challenges and wider reading.
 
-## What makes a suitable cryptographic algorithm, the “trapdoor” effect.<a name="trapdoor"></a>
+## What makes a suitable cryptographic algorithm? The "trapdoor" effect. <a name="trapdoor"></a>
 
-Cryptography heavily relies upon maths, using various algorithms that unless you're privy to some information current computers can't compute reasonable time frame. These are <ArticleLink text="trapdoor functions" href="https://en.wikipedia.org/wiki/Trapdoor_function" />, easy to produce a result in one direction, but difficult to produce the inverse without some secret information and why algorithms such as <ArticleLink text="RSA" href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)"/> and <ArticleLink text="ECDSA" href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm"/> are widely used today.
+Cryptography heavily relies upon various "hard” maths problems. These problems which, unless you have some secret information, can take a computer a very very long time ([in some cases trillions of years](https://www.quintessencelabs.com/blog/breaking-rsa-encryption-update-state-art)) to solve. These are [trapdoor functions](https://en.wikipedia.org/wiki/Trapdoor_function) - they make it easy to produce a result in one direction but incredibly difficult to produce the inverse without some secret information. Let’s see an example algorithm that leverages this.
 
-## Why cryptographic solutions widely used today are secure for now.<a name="secure-for-now"></a>
+<a name="diffie-hellman"></a>
+## Diffie-Hellman
 
-Many of the current “trapdoor functions” leverage <ArticleLink text="integer factorization" href="https://en.wikipedia.org/wiki/Integer_factorization"/>, RSA being the prime example. Though in recent times elliptic curves have become a popular alternative that leverage computing discrete logarithms. This <ArticleLink text="cloudflare article" href="https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/"/> is an excellent resource on the inner workings of elliptic curves and the contrast of discrete logarithms to integer factorization. These approaches are appropriate today because current computers do not have sufficient power to produce the inverse in a reasonable time frame. However that’s almost guaranteed to change in the future with <ArticleLink text="quantum computers" href="https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/"/> and there is a very real need to start creating algorithms that are post-quantum proof. For those interested, <ArticleLink text="this blog post" href="https://blog.cloudflare.com/nist-post-quantum-surprise/"/> is a great discussion of some of the current challenges around post-quantum cryptography and some of the algorithms that are looking to be standardised.
+[Diffie-Hellman](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#) (DH) as an algorithm paved the way for exchanging <ArticleLink href="https://en.wikipedia.org/wiki/Key_(cryptography)" text="crytographic keys"/> between parties who may never have had contact before through secure communication by establishing a joint secret. [Wikipedia](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) has an excellent analogy:
 
-## It’s amazingly simple to shoot yourself in the foot with cryptography algorithms<a name="difficult"></a>
+<img
+  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Diffie-Hellman_Key_Exchange.svg/250px-Diffie-Hellman_Key_Exchange.svg.png"
+  style="background-color: white; margin: 2rem auto;"
+/>{" "}
 
-There's good reason why the general guidance around cryptography is not to roll your own. On the cryptopals website it states
+The trapdoor effect here can be seen that even though the common paint and initial mixture are available for all to see, the mixture process is incredibly hard to reverse so the secret colour can't be derived from these facts alone. The clever part in DH is that both parties can mix their secret colour with the other’s initial mixture to come up with the same secret.
 
-> If you're not that familiar with crypto already, or if your familiarity comes mostly from things like Applied Cryptography, this fact may surprise you: most crypto is fatally broken. The systems we're relying on today that aren't known to be fatally broken are in a state of just waiting to be fatally broken. Nobody is sure that TLS 1.2 or SSH 2 or OTR are going to remain safe as designed.
+In reality very large numbers are used instead of paint. The problem here can be thought of as trying to find X (the exponent) where 2<sup>X</sup>(modulus 7) = 2. In plain english what is the number that when 2 is raised to and then divided by 7 has the remainder 2? This is pretty simple to find for small numbers but with large numbers is very hard for computers. This is the [discrete logarithm problem](https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/discrete-logarithm-problem). In Diffie-Hellman the common numbers (e.g. 2 and 7) are agreed by Alice and Bob in advance. Each individual then performs the aforementioned equation with a chosen secret as the exponent. Next each indivdual shares the resulting value and then performs the operation again but this time using the resulting value from the other as the number to be raised by their secret. In the end they both end up with the same number that can be used as their secret! I enjoyed learning the maths behind this one. It was also interesting learning how to use this maths concretely in a programming language, I had been using Rust for the challenges I did and there's a convenient package that has the [modpow operation](https://docs.rs/num-bigint/latest/num_bigint/struct.BigUint.html#method.modpow).
 
-and given some of the attacks that are walked through, it’s understandable why the more disconcerting statement is also made:
+Let's delve a bit deeper into some other maths that is leveraged to create the "trapdoor" effect in modern algorithms.
 
-> Counting is not a hard problem. But cryptography is. There are just a few things you can screw up to get the size of a buffer wrong. There are tens, probably hundreds, of obscure little things you can do to take a cryptosystem that should be secure even against an adversary with more CPU cores than there are atoms in the solar system, and make it solveable with a Perl script and 15 seconds. Don't take our word for it: do the challenges and you'll see.
+### Integer factorisation <a name="integer-factorisation"></a>
 
-Some easy mistakes to make if you're not careful (with links that cover various concepts referenced in more detail than I'm going to here) are:
+Given the number 713, can you tell me what its prime factors are without using a computer? Eventually you’d calculate that they were 23 and 31 by trial and error. But what if I gave you the number 843151 and said I was looking for the two specific prime factors that multiply together to make that number? By hand you’d likely not bother but maybe you’d google it. On the other hand what if I had asked for the result of multiplying 863 and 977 together? That is easy and number is 843151. This maths, integer factorisation using primes only, is at the heart of the popular [RSA algorithm](<https://en.wikipedia.org/wiki/RSA*(cryptosystem)>) that is widely used for secure communication. Part of the RSA algorithm is generating a number (N, which is used as a modulus in the algorithm and shared publicly) from two very large prime numbers. In real life the prime numbers are hundred of digits long. If the prime numbers could easily be derived from N then the RSA algorithm would be rendered insecure because the private key, which is used to decrypt messages that are encrypted with the public key, could be derived. For current RSA-2048 bit encryption keys it'd take a [computer ~300 trillion years](https://www.quintessencelabs.com/blog/breaking-rsa-encryption-update-state-art) to find the prime numbers. There are ways to attack RSA if the primes are too small or too close together.
 
-1. Using pseduo random number generators (PRNG) instead of cryptographically secure pseudorandom number generator (CSPRNG).
-   - PRNG are not designed for cryptography and can be the basis of <ArticleLink href="https://cwe.mitre.org/data/definitions/338.html" text="various attacks"/>
-   - This can cause item 2 below
-   - <ArticleLink
-       href="https://abrictosecurity.com/extracting-private-keys-from-public-keys-generated-with-weak-random-number-generators/"
-       text="Cause weak public RSA keys that can be used to extract the private key"
-     />
-2. <ArticleLink
-     href="https://github.com/christianlundkvist/blog/blob/master/2021_01_25_nonce_reuse_in_encryption/nonce_reuse_in_encryption.md"
-     text="Reusing a nonce, this can lead to the ability to determine the plaintext of encrypted messages without the secret key."
-   />
-3. MAC-then-Encrypt, this provides no guarantee about the authenticity of the data being transferred and has been the basis of timing attacks such as the <ArticleLink href="https://en.wikipedia.org/wiki/Lucky_Thirteen_attack" text="lucky thirteen attack against TLS" />. ALWAYS Encrypt-then-MAC by <ArticleLink href="https://crypto.stackexchange.com/questions/202/should-we-mac-then-encrypt-or-encrypt-then-mac" text="default"/>.
+<a name="ecdlp"></a>
+### Simplified overview of the elliptic curve discrete logarithm problem{" "}
 
-## Implementing Diffie-Hellman<a name="diffie-hellman"></a>
+This section we’ll be looking at some maths involved in Elliptic Curve Cryptography (ECC). Hopefully upon completing this section you’ll feel like you understand a simplified explanation of the "hard” maths problem at the core of ECC. An elliptic curve satisfies the equation y<sup>2</sup> = x<sup>3</sup> + ax + b and across the x-axis is symmetrical the majority of the time. For our purpose the top right curve on the diagram below is the most helpful image.
 
-This is the activity I enjoyed most, albeit one of the more simpler challenges. <ArticleLink href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#" text="Diffie-Hellman"/> as an algorithm paved the way for exchanging crytographic keys for parties who may never have had contact before and establish a joint secret key. Wikipedia has an excellent analogy that shows the key concept behind process: <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Diffie-Hellman_Key_Exchange.svg/250px-Diffie-Hellman_Key_Exchange.svg.png" style="background-color: white; margin: 2rem auto;"/> The vital part is even with a person listening in on the exchange and being able to see the common paint and initial mixed result, they could not derive the secret paint chosen in a reasonable time manner - the trapdoor effect referenced earlier. In reality very large numbers are used instead of paint. I enjoyed learning some of the maths behind this one, how modpow works and utilising it in <ArticleLink href="https://docs.rs/num-bigint/latest/num_bigint/struct.BigUint.html#method.modpow" text="Rust"/>.
+<img
+  src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/EllipticCurveCatalog.svg/800px-EllipticCurveCatalog.svg.png"
+  style="background-color: white; margin: 2rem auto;"
+/>
 
-## Summary<a name="summary"></a>
+An interesting problem they present is represented in the form of an equation nP = E, where the value n here is the number
+of times point P was "dotted” on a curve. Before explaining what "dotted” means a
+key piece of information is that for two given points on a curve (e.g. our starting
+points A and B that will both be on one side of the x-axis) there will always be at most a third. What this means is for our
+starting point we can find the third point, C, on the curve by drawing a straight
+line through A and B. Once we’ve found where this line intercepts on the curve we
+find the corresponding point of the curve on the other side of the x-axis and this
+becomes C. Now we repeat the process using A and C as our two points to find where
+the next part of the graph is intercepted and flip over the x-axis again to find D. If you’d like
+to see a visual representation of this process and a good resource I’d highly recommend
+the following [video](https://www.youtube.com/watch?v=gAtBM06xwaw). This process,
+adding a point to itself, is often referred to "dotting”. Formally this is called
+[Elliptic curve point multiplication](https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication)
+and the number of times we "dot” becomes our private key (n). E is the result of
+how many times we "dotted” the starting point P. Finding n from E and P is incredibly
+difficult but finding E from n and P is simple for computers. This problem is known
+as the elliptic curve discrete logarithm problem (ecdlp) and is a form of the discrete
+logarithm problem we saw earlier.
 
-I really enjoyed (and found very frustrating at points) some of the cryptopals challenges. I've learned a lot about cryptography that I didn't know before such as the inner working of some algorithms and how they can be attacked. There are many elements (e.g. the inner workings of elliptic curves) that I would not dare claim to be an expert but I have a lot more working knowledge and points of reference than I did when I started cryptopals.
+An interesting point about elliptic curves in comparison to algorithms like RSA is for numbers of
+the same size they essentially give us more "bang for our buck” in terms of security.
+According to this [paper](https://eprint.iacr.org/2013/635.pdf?ref=blog.cloudflare.com),
+that has the analogy of how much water you’d need to bring to a boil for the idea
+of difficulty or "security”, it only takes a 210-bit elliptic curve key to match
+a 1990-bit RSA key and hence why algorithms like [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
+are popular.
 
-I ran into a situation recently where a upgrade highlighted the use of a no longer fit for purpose algorithm in a system. Furthermore while considering solutions one of options (very quickly discounted given the following) actually rolled their own version of an algorithm that is no longer considered fit for purpose... It was very rewarding to have a deeper understanding of why and being able to leverage it.
+## Why current cryptographic solutions widely used today are secure - for now. <a name="secure-for-now"/>
+
+While these algorithms are popular today, they are almost certainly going to be replaced in the future because of [quantum computers](https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/). A quantum computer could execute algorithms ([Shor’s algorithm](https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm) is the one of most interest in relation to this post) that would be able to solve the "hard" problems discussed here in a matter of seconds or minutes. Quantum computers will essentially render current cryptographic algorithms as useless and nothing would be secure. Thankfully there has been a lot of work already done to solve this problem with the development of post-quantum algorithms. [This blog post](https://blog.cloudflare.com/nist-post-quantum-surprise/) gives a detailed walkthrough of various algorithms with their various trade-offs and which ones are being standardised for those who are interested.
+
+## A very easy way to shoot yourself in the foot in cryptography - insecure randomness<a name="insecure-randomness"/>
+
+Cryptography needs a degree of randomness. One example is if the same word, e.g. "hello”, always produced the same ciphertext (the output of the message into an encryption function, in this case "hello”) then it’d be very easy to decipher messages over time. This is because an attacker could build a dictionary of how plaintext relates to ciphertext. Pseduo-Random Number Generators (PRNGs) are often used to approximate randomness in programs (e.g. a head or tail coin flip) but are actually highly predictable because the sequence of numbers they produce are based off a seed. The trouble comes in when PRNGs are used for cryptographic purposes because of all of a sudden what should be seemingly random isn’t. For example [OWASP](https://owasp.org/www-community/vulnerabilities/Insecure_Randomness) give a great example where a receipt url is generated using a PRNG for part of the url with the current time as the seed:
+
+```java
+String GenerateReceiptURL(String baseUrl) {
+    Random ranGen = new Random();
+    ranGen.setSeed((new Date()).getTime());
+    return(baseUrl + Gen.nextInt(400000000) + ".html");
+}
+```
+
+The problem here is that if an attacker determined that a time was the seed for the url then it’s possible for them a) identify other receipt urls by brute forcing time ranges and b) predict future valid URLs based on a given time. As on the OWASP page, DO NOT DO THIS. Instead Cryptographic Pseduo-Random Number Generators (CPRNGs) are designed for these scenarios because they are not predictable in the same manner and should be used.
+
+There are algorithms that depend upon an initialisation vector (IV) for randomness to ensure repeated words do not produce repeated cipher text as described earlier. Using an inappropriate PRNG that repeats values with these algorithms in some circumstances [can actually lead to attackers being able to determine the plaintext of a ciphertext](https://stackered.com/blog/iv-mishandling/) without the encryption key. From a security perspective this would be disastrous.
+
+## Summary <a name="summary"/>
+
+I really enjoyed (and found very frustrating at points) some of the cryptopals challenges. I've learned a lot about cryptography that I didn't know before such as the inner workings of various algorithms and some of the "hard” maths problems involved. There are many elements (e.g. the inner workings of elliptic curves) that I would not dare claim to be an expert about but I have a lot more working knowledge and points of reference than I did when I started cryptopals.
+
+I ran into a situation recently where a upgrading a dependency highlighted the use of a no longer fit for purpose algorithm in a system. Furthermore while considering solutions one of options (very quickly discounted given the following) actually rolled their own version of the outdated algorithm in a library... It was very rewarding to be able to apply some of the knowledge learned from doing some of cryptopal challenges in that context.
 
 </Post>
