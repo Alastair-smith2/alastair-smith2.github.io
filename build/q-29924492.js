@@ -1,0 +1,1 @@
+import{X as t,G as e,_ as o}from"./q-c4d9033e.js";const i=t(e(()=>o(()=>import("./q-669daf38.js"),["build/q-669daf38.js","build/q-c4d9033e.js"]),"s_FdbX4M10c2k")),a={title:"Posts",meta:[{name:"description",content:"List of posts by date"}]};export{i as default,a as head};

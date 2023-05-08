@@ -1,1 +1,0 @@
-import{X as t,G as o,_ as e}from"./q-4afb4ccf.js";const i=t(o(()=>e(()=>import("./q-9791df95.js"),["build/q-9791df95.js","build/q-4afb4ccf.js","build/q-54ea870e.js","build/q-4f666876.js"]),"s_oxFHno0q65A")),s={title:"Alastair Smith's blog",meta:[{name:"description",content:"Alastair Smith's blog home page"}]};export{i as default,s as head};
