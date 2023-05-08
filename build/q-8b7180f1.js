@@ -1,0 +1,1 @@
+import{X as t,G as o,_ as a}from"./q-d6960b2f.js";const e=t(o(()=>a(()=>import("./q-de4bf21b.js"),["build/q-de4bf21b.js","build/q-1885bb6d.js","build/q-d6960b2f.js"]),"s_T0GZMKDZCyg")),n={title:"About",meta:[{name:"description",content:"About page containing information about Alastair"}]};export{e as default,n as head};
