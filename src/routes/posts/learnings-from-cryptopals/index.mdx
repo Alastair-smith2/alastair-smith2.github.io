@@ -97,7 +97,7 @@ While these algorithms are popular today, they are almost certainly going to be 
 Cryptography needs a degree of randomness. One example is if the same word, e.g. "hello”, always produced the same ciphertext (the output of the message into an encryption function, in this case "hello”) then it’d be very easy to decipher messages over time. This is because an attacker could build a dictionary of how plaintext relates to ciphertext. Pseduo-Random Number Generators (PRNGs) are often used to approximate randomness in programs (e.g. a head or tail coin flip) but are actually highly predictable because the sequence of numbers they produce are based off a seed. The trouble comes in when PRNGs are used for cryptographic purposes because of all of a sudden what should be seemingly random isn’t. For example [OWASP](https://owasp.org/www-community/vulnerabilities/Insecure_Randomness) give a great example where a receipt url is generated using a PRNG for part of the url with the current time as the seed:
 
 ```java
-String GenerateReceiptURL(String baseUrl) {
+String generateReceiptURL(String baseUrl) {
     Random ranGen = new Random();
     ranGen.setSeed((new Date()).getTime());
     return(baseUrl + Gen.nextInt(400000000) + ".html");
@@ -112,6 +112,6 @@ There are algorithms that depend upon an initialisation vector (IV) for randomne
 
 I really enjoyed (and found very frustrating at points) some of the cryptopals challenges. I've learned a lot about cryptography that I didn't know before such as the inner workings of various algorithms and some of the "hard” maths problems involved. There are many elements (e.g. the inner workings of elliptic curves) that I would not dare claim to be an expert about but I have a lot more working knowledge and points of reference than I did when I started cryptopals.
 
-I ran into a situation recently where a upgrading a dependency highlighted the use of a no longer fit for purpose algorithm in a system. Furthermore while considering solutions one of options (very quickly discounted given the following) actually rolled their own version of the outdated algorithm in a library... It was very rewarding to be able to apply some of the knowledge learned from doing some of cryptopal challenges in that context.
+I ran into a situation recently where upgrading a dependency highlighted the use of a no longer fit for purpose algorithm in a system. Furthermore while considering solutions one of options (very quickly discounted given the following) actually rolled their own version of the outdated algorithm in a library... It was very rewarding to be able to apply some of the knowledge learned from doing some of cryptopal challenges in that context.
 
 </Post>

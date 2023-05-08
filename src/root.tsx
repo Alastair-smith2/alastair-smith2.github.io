@@ -40,6 +40,7 @@ export default component$(() => {
       <body lang="en">
         <RouterOutlet />
         <ServiceWorkerRegister />
+        <script src="/scripts/prism.js" />
       </body>
     </QwikCityProvider>
   );

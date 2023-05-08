@@ -14,19 +14,7 @@ export const RouterHead = component$(() => {
 
       <link rel="canonical" href={loc.url.href} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link
-        rel="preload"
-        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism-dark.min.css"
-        as="style"
-        /* @ts-ignore */
-        onload="this.onload=null;this.rel='stylesheet'"
-      ></link>
-      <noscript>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism-dark.min.css"
-        />
-      </noscript>
+      <link href="/stylesheets/prism.css" rel="stylesheet" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
