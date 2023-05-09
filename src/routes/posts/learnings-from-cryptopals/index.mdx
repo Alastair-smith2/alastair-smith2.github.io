@@ -19,13 +19,13 @@ import Post, { ArticleLink } from "~/components/posts/post";
 3. [Diffie-Hellman](#diffie-hellman)
 4. [Integer factorisation](#integer-factorisation)
 5. [Elliptic curve discrete logarithm problem](#ecdlp)
-6. [Why current crytopgprahic algorithms are secure - for now](#secure-for-now)
+6. [Why current cryptographic algorithms are secure - for now](#secure-for-now)
 7. [Insecure randomness](#insecure-randomness)
 8. [Summary](#summary)
 
 ## What is cryptopals? <a name="cryptopals"></a>
 
-At first glance people could be mistaken for thinking this post is going to be related to cryptocurrency, but that is not the case. <ArticleLink text="Cryptopals" href="https://cryptopals.com/"/> is a series of challenges that relate to cryptography. Cryptogprahy is essential to the modern internet; it helps provide security by preventing others from intercepting communication that is intended to be private, and is fundamental to efforts like <ArticleLink text="ending the need for passwords." href="https://blog.google/technology/safety-security/the-beginning-of-the-end-of-the-password/"/> The challenges on cryptopals help you learn about cryptography by providing problems that demonstrate how real-world attacks work against various algorithms. This post is some of my learnings from the cryptopals challenges and wider reading.
+At first glance people could be mistaken for thinking this post is going to be related to cryptocurrency, but that is not the case. <ArticleLink text="Cryptopals" href="https://cryptopals.com/"/> is a series of challenges that relate to cryptography. Cryptography is essential to the modern internet; it helps provide security by preventing others from intercepting communication that is intended to be private, and is fundamental to efforts like <ArticleLink text="ending the need for passwords." href="https://blog.google/technology/safety-security/the-beginning-of-the-end-of-the-password/"/> The challenges on cryptopals help you learn about cryptography by providing problems that demonstrate how real-world attacks work against various algorithms. This post is some of my learnings from the cryptopals challenges and wider reading.
 
 <a name="trapdoor" />
 ## What makes a suitable cryptographic algorithm? The "trapdoor" effect.
@@ -40,7 +40,7 @@ Cryptography heavily relies upon various "hard" maths problems. These problems w
   href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#"
 /> (DH) as an algorithm which paved the way for exchanging <ArticleLink
   href="https://en.wikipedia.org/wiki/Key_(cryptography)"
-  text="crytographic keys"
+  text="cryptographic keys"
 /> securely between parties who may never have had contact before, by establishing
 a joint secret. <ArticleLink
   text="Wikipedia"
@@ -57,17 +57,17 @@ The trapdoor effect here can be seen because even though the common paint and in
 
 In reality very large numbers are used instead of paint.
 
-Let's look at an example equation which I have filled with simple numbers
+Let's look at an example equation which I have filled with simple numbers:
 
 2<sup>x</sup>(mod 7) = 2
 
-The difficulty here is trying to find X (the exponent). In plain English, this equation is asking, what is the number that when 2 is raised to X and then divided by 7, has the remainder 2? This is simple to find for small numbers but with large numbers is very hard for computers to fathom. This is the <ArticleLink text="discrete logarithm problem" href="https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/discrete-logarithm-problem"/>. In the DH example above the common numbers (e.g. 2 and 7) are agreed by Alice and Bob in advance. Each individual then performs the aforementioned equation with a chosen secret as the exponent. Next, each individual shares the resulting value and then performs the operation again but this time using the resulting value from the other as the number to be raised by their secret. In the end they both end up with the same number that can be used as a secret for secure communication! I enjoyed learning the maths behind this one. It was also interesting learning how to use this maths concretely in a programming language - I had been using Rust for the challenges and there's a convenient package that has the <ArticleLink text="modpow operation" href="https://docs.rs/num-bigint/latest/num_bigint/struct.BigUint.html#method.modpow"/>.
+The difficulty here is trying to find X (the exponent). In plain English, this equation is asking, what is the number that when 2 is raised to X and then divided by 7, has the remainder 2? This is simple to find for small numbers, but with large numbers it becomes very hard for computers to fathom. This is the <ArticleLink text="discrete logarithm problem" href="https://www.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/discrete-logarithm-problem"/>. In the DH example above the common numbers (e.g. 2 and 7) are agreed by Alice and Bob in advance. Each individual then performs the aforementioned equation with a chosen secret as the exponent. Next, each individual shares the resulting value and then performs the operation again but this time using the resulting value from the other as the number to be raised by their secret. In the end they both end up with the same number that can be used as a secret for secure communication! I enjoyed learning the maths behind this one. It was also interesting learning how to use this maths concretely in a programming language - I had been using Rust for the challenges and there's a convenient package that has the <ArticleLink text="modpow operation" href="https://docs.rs/num-bigint/latest/num_bigint/struct.BigUint.html#method.modpow"/>.
 
 Let's delve a bit deeper into some other maths that is leveraged to create the "trapdoor" effect in modern algorithms.
 
 ## Integer factorisation <a name="integer-factorisation"></a>
 
-Given the number 713, can you tell me what its prime factors are without using a computer? By trial and error eventually you’d calculate that they were 23 and 31. But what if I gave you the number 843151 and said I was looking for the two specific prime factors that multiply together to make that number? By hand you’d likely not bother but maybe you’d google it. On the other hand, what if I had asked for the result of multiplying 863 and 977 together? That is easy, the number is 843151. This maths, integer factorisation using primes only, is at the heart of the popular <ArticleLink text="RSA algorithm" href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)"/> that is widely used for secure communication. Part of the RSA algorithm is generating a number (N, which is used as a modulus in the algorithm and shared publicly) from two very large prime numbers. In real life the prime numbers are hundreds of digits long. If the prime numbers could easily be derived from N then the RSA algorithm would be rendered insecure because the private key - which is used to decrypt messages that are encrypted with the public key - could be derived. For current RSA-2048 bit encryption keys it would take a <ArticleLink text="computer ~300 trillion years" href="https://www.quintessencelabs.com/blog/breaking-rsa-encryption-update-state-art"/> to find the prime numbers. There are ways to attack RSA if the prime numbers are too small or too close together.
+Given the number 713, can you tell me what its prime factors are without using a computer? By trial and error eventually you’d calculate that they were 23 and 31. But what if I gave you the number 843151 and said I was looking for the two specific prime factors that multiply together to make that number? By hand you’d likely not bother but maybe you’d google it. On the other hand, what if I had asked for the result of multiplying 863 and 977 together? That is easy: the number is 843151. This maths - integer factorisation using primes only - is at the heart of the popular <ArticleLink text="RSA algorithm" href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)"/> that is widely used for secure communication. Part of the RSA algorithm is generating a number (N, which is used as a modulus in the algorithm and shared publicly) from two very large prime numbers. In real life the prime numbers are hundreds of digits long. If the prime numbers could easily be derived from N, the RSA algorithm would be rendered insecure because the private key - which is used to decrypt messages that are encrypted with the public key - could be derived. For current RSA-2048 bit encryption keys it would take a <ArticleLink text="computer ~300 trillion years" href="https://www.quintessencelabs.com/blog/breaking-rsa-encryption-update-state-art"/> to find the prime numbers. There are ways to attack RSA if the prime numbers are too small or too close together.
 
 <a name="ecdlp"></a>
 ## Simplified overview of the Elliptic Curve Discrete Logarithm Problem
@@ -89,7 +89,7 @@ find the corresponding point of the curve on the other side of the x-axis and th
 becomes C. Now we repeat the process using A and C as our two points to find where
 the next part of the graph is intercepted and flip over the x-axis again to find D. If you’d like
 to see a visual representation of this process <ArticleLink text="this video" href="https://www.youtube.com/watch?v=gAtBM06xwaw"/> is an excellent resource. This process,
-which is the adding of a point to itself, is often referred to "dotting". Formally this is called <ArticleLink
+which is the adding of a point to itself, is often referred to "dotting". Formally, this is called <ArticleLink
   text="Elliptic curve point multiplication"
   href="https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication"
 />
@@ -101,21 +101,20 @@ logarithm problem we saw earlier.
 
 An interesting point about elliptic curves in comparison to algorithms like RSA is for numbers of
 the same size they essentially give us more "bang for our buck" in terms of security.
-According to this <ArticleLink text="paper" href="https://eprint.iacr.org/2013/635.pdf"/>,
-that has the analogy of how much water you’d need to bring to a boil for the idea
-of difficulty or "security", it only takes a 210-bit elliptic curve key to match
+According to this <ArticleLink text="paper" href="https://eprint.iacr.org/2013/635.pdf"/> (which has the analogy of how much water you’d need to bring to a boil for the idea
+of difficulty or "security") it only takes a 210-bit elliptic curve key to match
 a 1990-bit RSA key, hence why algorithms like <ArticleLink text="ECDSA" href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm"/>
 are popular.
 
 <a name="secure-for-now" />
 ## Why current cryptographic solutions widely used today are secure - for now.
 
-While these algorithms are popular today, they are almost certainly going to be replaced in the future due to <ArticleLink text="quantum computers" href="https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/"/>. A quantum computer could execute algorithms (<ArticleLink text="Shor’s algorithm" href="https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm"/> is the most relevant to this post) that would be able to solve the "hard" problems discussed here in a matter of seconds or minutes. Quantum computers will essentially render current cryptographic algorithms useless, so nothing would be secure. Thankfully there has been a lot of work already done to solve this problem with the development of post-quantum algorithms. <ArticleLink text="This blog post" href="https://blog.cloudflare.com/nist-post-quantum-surprise/"/> gives a detailed walkthrough of various algorithms with their various trade-offs, and outlines which ones are being standardised for those who are interested.
+While these algorithms are popular today, they are almost certainly going to be replaced in the future due to <ArticleLink text="quantum computers" href="https://blog.cloudflare.com/towards-post-quantum-cryptography-in-tls/"/>. A quantum computer could execute algorithms (<ArticleLink text="Shor’s algorithm" href="https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm"/> is the most relevant to this post) which would be able to solve the "hard" problems discussed here in a matter of seconds or minutes. Quantum computers will essentially render current cryptographic algorithms useless, so nothing would be secure. Thankfully there has been a lot of work already done to solve this problem with the development of post-quantum algorithms. <ArticleLink text="This blog post" href="https://blog.cloudflare.com/nist-post-quantum-surprise/"/> gives a detailed walkthrough of various algorithms with their various trade-offs, and outlines which ones are being standardised, for those who are interested.
 
 <a name="insecure-randomness" />
 ## A very easy way to shoot yourself in the foot in cryptography - insecure randomness
 
-Cryptography needs a degree of randomness. One example is that if the same word, e.g. "hello", always produced the same ciphertext (the output of the message into an encryption function) then it would be very easy to decipher messages over time. This is because an attacker could build a dictionary of how plaintext relates to ciphertext. Pseduo-Random Number Generators (PRNGs) are often used to approximate randomness in programs but are actually highly predictable because the sequence of numbers they produce is based off a seed. The trouble comes in when PRNGs are used for cryptographic purposes because all of a sudden what should be seemingly random, isn’t. For example, <ArticleLink text="OWASP" href="https://owasp.org/www-community/vulnerabilities/Insecure_Randomness"/> give a great example where a receipt URL is generated using a PRNG for part of the URL with the current time as the seed:
+Cryptography needs a degree of randomness. One example is that if the same word, e.g. "hello", always produced the same ciphertext (the output of the message into an encryption function) then it would be very easy to decipher messages over time. This is because an attacker could build a dictionary of how plaintext relates to ciphertext. Pseudo-Random Number Generators (PRNGs) are often used to approximate randomness in programs but are highly predictable because the sequence of numbers they produce is based off a seed. The trouble comes in when PRNGs are used for cryptographic purposes because suddenly what should be seemingly random, isn’t. For example, <ArticleLink text="OWASP" href="https://owasp.org/www-community/vulnerabilities/Insecure_Randomness"/> give a great example where a receipt URL is generated using a PRNG for part of the URL with the current time as the seed:
 
 ```java
 String generateReceiptURL(String baseUrl) {
@@ -125,14 +124,14 @@ String generateReceiptURL(String baseUrl) {
 }
 ```
 
-The problem here is that if an attacker determined that a specific time was the seed for the URL then it’s possible for them a) identify other receipt URLs by brute forcing time ranges and b) predict future valid URLs based on a given time. Instead, Cryptographic Pseduo-Random Number Generators (CPRNGs) are designed for these scenarios because they are not predictable in the same manner - these should be used rather than PRNGs.
+The problem here is that if an attacker determined that a specific time was the seed for the URL then it’s possible for them a) identify other receipt URLs by brute forcing time ranges and b) predict future valid URLs based on a given time. Instead, Cryptographic Pseudo-Random Number Generators (CPRNGs) are designed for these scenarios because they are not predictable in the same manner - these should be used rather than PRNGs.
 
 There are algorithms that depend upon an initialisation vector (IV) for randomness to ensure repeated words do not produce repeated cipher text as described earlier. Using an inappropriate PRNG that repeats values with these algorithms in some circumstances <ArticleLink text="can actually lead to attackers being able to determine the plaintext of a ciphertext" href="https://stackered.com/blog/iv-mishandling/"/> without the encryption key. From a security perspective this would be disastrous.
 
 ## Summary <a name="summary"/>
 
-I really enjoyed (and at times found very frustrating) some of the cryptopals challenges. I've learned a lot about cryptography that I didn't know before such as the inner workings of various algorithms and some of the "hard" maths problems involved. There are many elements (e.g. the inner workings of elliptic curves) that I would not dare claim to be an expert about but I have a lot more working knowledge and points of reference than I did when I started cryptopals.
+I really enjoyed (and at times found very frustrating) some of the cryptopals challenges. I've learned a lot about cryptography which I didn't know before, such as the inner workings of various algorithms and some of the "hard" maths problems involved. There are many elements (e.g. the inner workings of elliptic curves) that I would not dare claim to be an expert about but I have a lot more working knowledge and points of reference than I did when I started cryptopals.
 
-I ran into a situation recently where upgrading a dependency highlighted the use of an algorithm that is no longer fit for purpose. Having looked up the algorithm, it was very rewarding to see that some of the knowledge I had picked up as a result of the cryptopals challenges was directly relevant. I ended up having a good discussion with some of my colleagues off the back of it.
+I ran into a situation recently where upgrading a dependency highlighted the use of an algorithm that is no longer fit for purpose. Having looked up the algorithm, it was very rewarding to see that some of the knowledge I had picked up through the cryptopals challenges was directly relevant. I ended up having a good discussion with some of my colleagues off the back of it.
 
 </Post>
