@@ -13,7 +13,10 @@ test("can navigate to entry from posts list", async ({
   await expect(title).toBeVisible();
 
   const blogPostHeadings = page.getByRole("heading", { level: 4 });
-  await expect(blogPostHeadings).toHaveCount(1);
+  await expect(blogPostHeadings).toHaveCount(2);
+
+  const cryptopals = page.getByText("Cryptopals");
+  await expect(cryptopals).toBeVisible();
 
   const entry = page.getByText("New blog");
   await entry.click();
