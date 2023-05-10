@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import { ContentMenu } from "@builder.io/qwik-city";
-import { JSX } from "@builder.io/qwik/jsx-runtime";
+import type { ContentMenu } from "@builder.io/qwik-city";
+import type { JSX } from "@builder.io/qwik/jsx-runtime";
 import Subheader from "~/components/subheader";
 import PostLink from "../link";
 
@@ -36,7 +36,6 @@ export default component$(
       );
     }
 
-    const showSingleCol = items.length <= 1;
     const allPublishedPosts = getRelevantPosts(items, !showDrafts);
     const posts = mostRecentItemsOnly
       ? allPublishedPosts.slice(0, MOST_RECENT_ITEM_COUNT)
@@ -44,13 +43,7 @@ export default component$(
     return (
       <>
         <Subheader text={props.item.text} />
-        <ul
-          class={`grid ${
-            showSingleCol ? "sm:grid-cols-1" : "sm:grid-cols-2"
-          } gap-8`}
-        >
-          {posts}
-        </ul>
+        <ul class={`grid sm:grid-cols-2 gap-8`}>{posts}</ul>
       </>
     );
   }

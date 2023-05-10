@@ -18,11 +18,14 @@ export default component$(() => {
       <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
       {menu?.items && (
         <>
-          <PostSection
-            mostRecentItemsOnly={true}
-            item={menu.items[0]}
-            showDrafts={showDraftPosts.showDraftPosts}
-          />
+          {menu?.items?.map((section) => (
+            <PostSection
+              mostRecentItemsOnly={true}
+              key={section.text}
+              item={section}
+              showDrafts={showDraftPosts.showDraftPosts}
+            />
+          ))}
           <div class="mt-6">
             <Link text="See all posts" href="/posts" />
           </div>
