@@ -113,9 +113,9 @@ Cryptography needs a degree of randomness. One example is that if the same word,
 
 ```java
 String generateReceiptURL(String baseUrl) {
-    Random ranGen = new Random();
-    ranGen.setSeed((new Date()).getTime());
-    return(baseUrl + Gen.nextInt(400000000) + ".html");
+  Random ranGen = new Random();
+  ranGen.setSeed((new Date()).getTime());
+  return(baseUrl + Gen.nextInt(400000000) + ".html");
 }
 ```
 
