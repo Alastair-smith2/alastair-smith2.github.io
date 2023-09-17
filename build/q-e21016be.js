@@ -1,1 +1,0 @@
-import{O as t,c as e,_ as o}from"./q-7624828a.js";const a=t(e(()=>o(()=>import("./q-37987b58.js"),["build/q-37987b58.js","build/q-7624828a.js"]),"s_ZDH6m7xhU0Y")),i={title:"Oops, there's nothing here",meta:[{name:"description",content:"Looks like that page doesn't exist"}]};export{a as default,i as head};
