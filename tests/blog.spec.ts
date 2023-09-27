@@ -1,5 +1,9 @@
 import { test, expect } from "./axe-test";
-import { HOME_URL } from "./constants";
+import {
+  BLOG_POST_HEADING_LEVEL,
+  EXPECTED_BLOG_POST_COUNT,
+  HOME_URL,
+} from "./constants";
 
 test("can navigate to entry from posts list", async ({
   page,
@@ -12,8 +16,8 @@ test("can navigate to entry from posts list", async ({
   const title = page.getByRole("heading", { name: "Blog posts" });
   await expect(title).toBeVisible();
 
-  const blogPostHeadings = page.getByRole("heading", { level: 4 });
-  await expect(blogPostHeadings).toHaveCount(3);
+  const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
+  await expect(blogPostHeadings).toHaveCount(EXPECTED_BLOG_POST_COUNT);
 
   const cryptopals = page.getByText("Cryptopals");
   await expect(cryptopals).toBeVisible();
