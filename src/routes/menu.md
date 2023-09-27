@@ -1,5 +1,9 @@
 # Recent blogs posts
 
+## September 2023
+
+- [Major version upgrades: Dreaming of what could be normal](posts/major-version-upgrades/index.mdx)
+
 ## May 2023
 
 - [Draft: Statecharts: The "beefed up" state machines](posts/statecharts/index.mdx)
