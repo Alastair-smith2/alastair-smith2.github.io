@@ -20,12 +20,12 @@ export default component$(
           {tags && (
             <ul class="flex gap-2 flex-wrap mt-4">
               {tags.split(", ").map((tag) => (
-                <p
+                <li
                   class="text-white mb-2 border-solid border-2 rounded-full p-2 border-white"
                   key={tag}
                 >
                   {tag}
-                </p>
+                </li>
               ))}
             </ul>
           )}
