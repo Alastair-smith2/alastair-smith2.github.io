@@ -1,7 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { ContentMenu } from "@builder.io/qwik-city";
 import type { JSX } from "@builder.io/qwik/jsx-runtime";
-import Subheader from "~/components/subheader";
 import PostLink from "../link";
 
 const MOST_RECENT_ITEM_COUNT = 4;
@@ -20,31 +19,23 @@ const getRelevantPosts = (
 
 export default component$(
   (props: {
-    item: ContentMenu;
+    item: ContentMenu | undefined;
     mostRecentItemsOnly: boolean;
     showDrafts: boolean;
   }) => {
     const { item, mostRecentItemsOnly, showDrafts } = props;
-    const items = item.items;
-
-    if (!items || items.length == 0) {
+    if (!item || !item.items || item.items.length == 0) {
       return (
         <>
-          <Subheader text={props.item.text} />
           <p class="text-white text-lg mt-6">No posts at the moment</p>
         </>
       );
     }
 
-    const allPublishedPosts = getRelevantPosts(items, !showDrafts);
+    const allPublishedPosts = getRelevantPosts(item.items, !showDrafts);
     const posts = mostRecentItemsOnly
       ? allPublishedPosts.slice(0, MOST_RECENT_ITEM_COUNT)
       : allPublishedPosts;
-    return (
-      <>
-        <Subheader text={props.item.text} />
-        <ul class={`grid sm:grid-cols-2 gap-8`}>{posts}</ul>
-      </>
-    );
+    return <ul class={`grid sm:grid-cols-2 gap-8`}>{posts}</ul>;
   }
 );

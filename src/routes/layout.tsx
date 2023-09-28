@@ -7,7 +7,7 @@ export default component$(() => {
     <div class="bg-slate-900 min-h-screen grid gap-2 grid-cols-1 grid-rows-3">
       <Header />
       <main class="row-span-3">
-        <section class="max-w-3xl mx-auto p-6">
+        <section class="max-w-4xl mx-auto p-6">
           <Slot />
         </section>
       </main>

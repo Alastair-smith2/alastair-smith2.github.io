@@ -7,9 +7,10 @@ import { DraftPostContext } from "~/root";
 
 export default component$(() => {
   const { menu } = useContent();
-  const showDraftPosts = useContext(DraftPostContext);
+  const { showDraftPosts } = useContext(DraftPostContext);
+
   return (
-    <div class="mx-auto max-w-3xl">
+    <div class="mx-auto max-w-4xl">
       <h2 class="text-3xl text-white">Welcome</h2>
       <p class="text-white text-lg mt-6">
         Hey, I'm <Link href="/about" text="Alastair" />. This blog will mainly
@@ -18,14 +19,11 @@ export default component$(() => {
       <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
       {menu?.items && (
         <>
-          {menu?.items?.map((section) => (
-            <PostSection
-              mostRecentItemsOnly={true}
-              key={section.text}
-              item={section}
-              showDrafts={showDraftPosts.showDraftPosts}
-            />
-          ))}
+          <PostSection
+            mostRecentItemsOnly={false}
+            item={menu}
+            showDrafts={showDraftPosts}
+          />
           <div class="mt-6">
             <Link text="See all posts" href="/posts" />
           </div>

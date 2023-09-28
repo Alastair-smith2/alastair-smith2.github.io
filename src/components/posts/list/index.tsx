@@ -10,14 +10,11 @@ export default component$(() => {
   return (
     <>
       <h2 class="text-3xl text-white mb-1">Blog posts</h2>
-      {menu?.items?.map((section) => (
-        <PostSection
-          mostRecentItemsOnly={false}
-          key={section.text}
-          item={section}
-          showDrafts={showDraftPosts.showDraftPosts}
-        />
-      ))}
+      <PostSection
+        mostRecentItemsOnly={false}
+        item={menu}
+        showDrafts={showDraftPosts.showDraftPosts}
+      />
     </>
   );
 });
