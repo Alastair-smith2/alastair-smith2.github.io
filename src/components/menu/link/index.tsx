@@ -23,7 +23,7 @@ export default component$<MenuLinkProp>((props) => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          class={`hover:text-emerald-700 text-white p-2
+          class={`hover:text-emerald-700 text-slate-200 p-2
         ${props.item.href == url.pathname && "underline underline-offset-1"} 
         ${
           props.style === "button" &&
@@ -35,7 +35,7 @@ export default component$<MenuLinkProp>((props) => {
         </a>
       ) : (
         <Link
-          class={`hover:text-emerald-700 text-white p-2
+          class={`hover:text-emerald-700 text-slate-200 p-2
         ${props.item.href == url.pathname && "underline underline-offset-1"} 
         ${
           props.style === "button" &&

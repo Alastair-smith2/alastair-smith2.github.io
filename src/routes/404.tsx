@@ -4,11 +4,11 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 export default component$(() => {
   return (
     <div class="mx-auto max-w-3xl">
-      <h2 class="text-3xl text-white">Oops, there's nothing here</h2>
-      <p class="text-white text-lg mt-6">
+      <h2 class="text-3xl text-slate-200">Oops, there's nothing here</h2>
+      <p class="text-slate-200 text-lg mt-6">
         Looks like that page doesn't exist 😢.
       </p>
-      <p class="text-white text-lg mt-6">
+      <p class="text-slate-200 text-lg mt-6">
         If you think it should,{" "}
         <a
           target="_blank"

@@ -25,17 +25,13 @@ export default component$(
   }) => {
     const { item, mostRecentItemsOnly, showDrafts } = props;
     if (!item || !item.items || item.items.length == 0) {
-      return (
-        <>
-          <p class="text-white text-lg mt-6">No posts at the moment</p>
-        </>
-      );
+      return <p class="text-slate-200 text-lg mt-6">No posts at the moment</p>;
     }
 
     const allPublishedPosts = getRelevantPosts(item.items, !showDrafts);
     const posts = mostRecentItemsOnly
       ? allPublishedPosts.slice(0, MOST_RECENT_ITEM_COUNT)
       : allPublishedPosts;
-    return <ul class={`grid sm:grid-cols-2 gap-8`}>{posts}</ul>;
+    return <ul>{posts}</ul>;
   }
 );
