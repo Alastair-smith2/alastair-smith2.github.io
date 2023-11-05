@@ -1,0 +1,1 @@
+import{g as l,M as n}from"./q-08a85817.js";import{a as s}from"./q-aabf3092.js";const a=t=>{if(!t.item||!t.item.items||t.item.items.length==0)return s("p",null,{class:"text-white text-lg mt-6"},"No posts at the moment",3,"my_0");const e=l(t.item.items,!t.showDrafts),m=t.mostRecentItemsOnly?e.slice(0,n):e;return s("ul",null,null,m,1,"my_1")};export{a as s_CjZOqE3On9Q};
