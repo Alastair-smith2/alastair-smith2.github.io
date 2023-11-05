@@ -9,7 +9,7 @@ export default component$(() => {
   const showDraftPosts = useContext(DraftPostContext);
   return (
     <>
-      <h2 class="text-3xl text-slate-200 mb-1">Blog posts</h2>
+      <h2 class="text-3xl text-white mb-1">Blog posts</h2>
       <PostSection
         mostRecentItemsOnly={false}
         item={menu}

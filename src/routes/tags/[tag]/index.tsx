@@ -20,7 +20,7 @@ export default component$(() => {
 
   return (
     <div>
-      <h2 class="text-3xl text-slate-200">Relevant posts</h2>
+      <h2 class="text-3xl text-white">Relevant posts</h2>
       <PostSection
         mostRecentItemsOnly={false}
         item={{ items: posts, text: "" }}
