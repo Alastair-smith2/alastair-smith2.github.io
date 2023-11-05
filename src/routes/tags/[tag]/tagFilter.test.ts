@@ -12,7 +12,15 @@ test("It should find the relevant posts", () => {
     text: "Top level text",
     items: [examplePostOne],
   };
-  expect(getRelevantPostsForTag(testMenu, "Tag A")).toEqual([examplePostOne]);
+  expect(getRelevantPostsForTag(testMenu, "Tag-A")).toEqual([examplePostOne]);
+});
+
+test("It should find the relevant posts regardless of case", () => {
+  const testMenu: ContentMenu = {
+    text: "Top level text",
+    items: [examplePostOne],
+  };
+  expect(getRelevantPostsForTag(testMenu, "tag-a")).toEqual([examplePostOne]);
 });
 
 test("It should return an empty array if there are no relevant posts", () => {

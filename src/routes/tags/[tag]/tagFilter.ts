@@ -11,7 +11,13 @@ export const getRelevantPostsForTag = (
     if (!potentialTags) {
       return false;
     }
-    const tags = potentialTags.toLowerCase().trim().split(", ");
+
+    // TODO: refactor this + the post link logic separately so they can't get out of sync
+    const tags = potentialTags
+      .toLowerCase()
+      .trim()
+      .split(", ")
+      .map((tag) => tag.replace(" ", "-"));
     return tags.includes(tag.toLowerCase());
   });
 };

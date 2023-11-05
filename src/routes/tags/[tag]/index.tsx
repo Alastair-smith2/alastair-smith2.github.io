@@ -26,11 +26,11 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
   // example of loading params for this use case
   // every implementation will be different
   const tags = [
-    "React Native",
-    "Feature Flags",
-    "Cryptography",
-    "Blog",
-    "Technology",
+    "react-native",
+    "feature-flags",
+    "cryptography",
+    "blog",
+    "technology",
   ];
 
   return {

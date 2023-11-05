@@ -29,7 +29,11 @@ export default component$(
                   class="text-white hover:bg-emerald-700 hover:underline mb-2 border-solid border rounded-full text-sm p-2 leading-3 border-gray"
                   key={tag}
                 >
-                  <Link href={`/tags/${tag.trim()}`}>{tag}</Link>
+                  <Link
+                    href={`/tags/${tag.trim().toLowerCase().replace(" ", "-")}`}
+                  >
+                    {tag}
+                  </Link>
                 </li>
               ))}
             </ul>
