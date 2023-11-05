@@ -20,6 +20,7 @@
     "preview": "qwik build preview && vite preview --open",
     "serve": "echo 'Run \"npm run qwik add\" to install a server adaptor'",
     "start": "vite --open --mode ssr",
+    "build.prod": "npm run build.client && npm run build.server",
     "test": "npx playwright test tests/",
     "test.unit.ci": "vitest run routes",
     "test.unit": "vitest routes",
