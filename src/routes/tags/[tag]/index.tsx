@@ -31,6 +31,7 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
     "cryptography",
     "blog",
     "technology",
+    "reflections",
   ];
 
   return {
