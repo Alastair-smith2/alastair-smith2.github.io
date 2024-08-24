@@ -15,9 +15,12 @@ export default component$(() => {
         }
       />
       <ul class="mt-2 list-disc list-inside">
-        <li class="text-white">The Rust language</li>
         <li class="text-white">
-          Other "challenger" languages (e.g. Go / Kotlin / WebAssembly)
+          The Rust language and other "challenger" languages (e.g. Go / Kotlin /
+          WebAssembly)
+        </li>
+        <li class="text-white">
+          Mechanics around scaling teams and culture in an organisation
         </li>
         <li class="text-white">
           Social dynamics around software engineering (e.g. benefits of pair
@@ -34,13 +37,13 @@ export default component$(() => {
       <Subheader text={"Non programming-wise, things I enjoy:"} />
       <ul class="mt-2 list-disc list-inside">
         <li class="text-white">
-          Board games and video games (have loved Ori and the Will of the Wisps
-          recently)
+          Games of various types (e.g. the zelda franchise on Nintendo consoles
+          and any good board game)
         </li>
+        <li class="text-white">Climbing</li>
         <li class="text-white">Playing football (AKA soccer)</li>
-        <li class="text-white">Cooking delicious food from around the world</li>
         <li class="text-white">Walking in the hills near where I live</li>
-        <li class="text-white">Animals (especially cats!)</li>
+        <li class="text-white">Animals (especially cats)</li>
         <li class="text-white">Spending time with family and friends</li>
       </ul>
       <p class="text-white text-lg mt-6">

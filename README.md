@@ -1,4 +1,8 @@
-# Qwik App ⚡️
+# Blog site
+
+This blog site is made by using Qwik as seen below.
+
+## Qwik App ⚡️
 
 - [Qwik Docs](https://qwik.builder.io/)
 - [Discord](https://qwik.builder.io/chat)

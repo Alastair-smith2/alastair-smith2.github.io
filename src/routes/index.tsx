@@ -20,7 +20,7 @@ export default component$(() => {
       {menu?.items && (
         <>
           <PostSection
-            mostRecentItemsOnly={false}
+            mostRecentItemsOnly={true}
             item={menu}
             showDrafts={showDraftPosts}
           />
