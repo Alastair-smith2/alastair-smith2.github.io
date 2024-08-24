@@ -13,7 +13,7 @@ test("homepage has title and navigation links", async ({
 
   await expect(page).toHaveTitle(/Alastair Smith's blog/);
 
-  const aboutLink = page.getByRole("link", { name: "About" });
+  const aboutLink = page.getByRole("link", { name: "About", exact: true });
   const postsLink = page.getByRole("link", { name: "Posts", exact: true });
   const homeLink = page.getByRole("link", { name: "Home" });
 
