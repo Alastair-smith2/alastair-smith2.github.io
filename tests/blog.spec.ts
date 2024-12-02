@@ -33,11 +33,10 @@ test("can navigate to entry from posts list", async ({
 
   const majorVersionUpgrades = page.getByText("Major version upgrades");
   await expect(majorVersionUpgrades).toBeVisible();
-
-  const entry = page.getByText("New blog");
-  await entry.click();
-  await expect(page).toHaveTitle(/New blog/);
-  const blogTitle = page.getByRole("heading", { name: "So why a blog?" });
+  
+  await majorVersionUpgrades.click();
+  await expect(page).toHaveTitle(/Major version upgrades/);
+  const blogTitle = page.getByRole("heading", { name: "Major version upgrades: Dreaming of what could be normal" });
   await expect(blogTitle).toBeVisible();
   const accessibilityScanResults = await makeAxeBuilder().analyze();
   expect(accessibilityScanResults.violations).toEqual([]);
