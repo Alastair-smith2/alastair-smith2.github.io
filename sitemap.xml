@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://alastair-smith2.github.io/about/</loc></url>
-<url><loc>https://alastair-smith2.github.io/</loc></url>
-<url><loc>https://alastair-smith2.github.io/posts/thinking-about-pressure/</loc></url>
-<url><loc>https://alastair-smith2.github.io/tags/reflections/</loc></url>
-<url><loc>https://alastair-smith2.github.io/posts/statecharts/</loc></url>
-<url><loc>https://alastair-smith2.github.io/tags/technology/</loc></url>
 <url><loc>https://alastair-smith2.github.io/posts/</loc></url>
+<url><loc>https://alastair-smith2.github.io/</loc></url>
+<url><loc>https://alastair-smith2.github.io/tags/data-engineering/</loc></url>
+<url><loc>https://alastair-smith2.github.io/posts/thinking-about-pressure/</loc></url>
+<url><loc>https://alastair-smith2.github.io/tags/react-native/</loc></url>
+<url><loc>https://alastair-smith2.github.io/tags/reflections/</loc></url>
 <url><loc>https://alastair-smith2.github.io/posts/cryptopals/</loc></url>
 <url><loc>https://alastair-smith2.github.io/posts/new-blog/</loc></url>
-<url><loc>https://alastair-smith2.github.io/tags/react-native/</loc></url>
-<url><loc>https://alastair-smith2.github.io/tags/blog/</loc></url>
-<url><loc>https://alastair-smith2.github.io/posts/major-version-upgrades/</loc></url>
-<url><loc>https://alastair-smith2.github.io/posts/musings-on-being-a-tech-lead/</loc></url>
 <url><loc>https://alastair-smith2.github.io/tags/feature-flags/</loc></url>
+<url><loc>https://alastair-smith2.github.io/tags/technology/</loc></url>
+<url><loc>https://alastair-smith2.github.io/posts/data-engineering/</loc></url>
+<url><loc>https://alastair-smith2.github.io/posts/major-version-upgrades/</loc></url>
 <url><loc>https://alastair-smith2.github.io/tags/cryptography/</loc></url>
+<url><loc>https://alastair-smith2.github.io/tags/blog/</loc></url>
 </urlset>
