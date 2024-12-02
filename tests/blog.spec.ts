@@ -1,7 +1,7 @@
 import { test, expect } from "./axe-test";
 import {
   BLOG_POST_HEADING_LEVEL,
-  EXPECTED_BLOG_POST_COUNT,
+  EXPECTED_TOTAL_BLOG_POST_COUNT,
   HOME_URL,
 } from "./constants";
 
@@ -17,7 +17,7 @@ test("can navigate to entry from posts list", async ({
   await expect(title).toBeVisible();
 
   const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
-  await expect(blogPostHeadings).toHaveCount(EXPECTED_BLOG_POST_COUNT);
+  await expect(blogPostHeadings).toHaveCount(EXPECTED_TOTAL_BLOG_POST_COUNT);
 
   const dataEngineering = page.getByText("Learning about data engineering");
   await expect(dataEngineering).toBeVisible();
@@ -33,10 +33,11 @@ test("can navigate to entry from posts list", async ({
 
   const majorVersionUpgrades = page.getByText("Major version upgrades");
   await expect(majorVersionUpgrades).toBeVisible();
-  
-  await majorVersionUpgrades.click();
-  await expect(page).toHaveTitle(/Major version upgrades/);
-  const blogTitle = page.getByRole("heading", { name: "Major version upgrades: Dreaming of what could be normal" });
+
+  const entry = page.getByText("New blog");
+  await entry.click();
+  await expect(page).toHaveTitle(/New blog/);
+  const blogTitle = page.getByRole("heading", { name: "So why a blog?" });
   await expect(blogTitle).toBeVisible();
   const accessibilityScanResults = await makeAxeBuilder().analyze();
   expect(accessibilityScanResults.violations).toEqual([]);
