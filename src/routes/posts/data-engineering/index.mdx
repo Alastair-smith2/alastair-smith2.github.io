@@ -1,0 +1,86 @@
+---
+title: Learning about data engineering
+author: Alastair Smith
+description: Reflecting on what stood out as a software engineer
+Date: 05/11/2023
+og:
+  - title: Reflecting on what stood out as a software engineer
+    description: true
+---
+
+import Post, { ArticleLink } from "~/components/posts/post";
+
+<Post>
+
+# Learning about data engineering: Reflecting on what stood out as a software engineer
+
+1. [Databricks data engineer associate](#databricks-data-engineer-associate)
+2. [Lakehouse](#lakehouse)
+3. [Medallion architecture](#medallion-architecture)
+4. [Extract Load Transform (ELT) vs Extract Transform Load (ETL)](#extract-load-transform-elt-vs-extract-transform-load-etl)
+5. [Pipelines, pipelines, pipelines...](#pipelines-pipelines-pipelines)
+6. [Compute and scaling](#compute-and-scaling)
+7. [Data Governance](#data-governance)
+8. [Notebooks, CI/CD and Testing](#notebooks-cicd-and-testing)
+9. [Summary](#summary)
+
+## Databricks data engineer associate<a name="databricks-data-engineer-associate"></a>
+
+Recently I passed the <ArticleLink text="Databricks data engineer associtate certification" href="https://www.databricks.com/learn/certification/data-engineer-associate"/>. Data engineering was something I had never done much of before. While I don’t foresee myself doing this as a permanent role I wanted to be able to contribute and have some understanding of “what does good look like”.
+
+This is going to be a summary of some of what stood out, for various reasons, as someone who
+
+1. Has done little to no data engineering before.
+2. Primarily comes from a software engineering (developer) background. I’ve done more with web-based applications but did mobile-only for a while.
+3. Has worked on products which involved needing to understand scaling, cost control and permission concerns while using different cloud providers.
+4. Enjoys working in the intersection between applications and platform engineering.
+5. Has only written Python once and exposure to SQL has primarily being through tools like <ArticleLink text="JOOQ" href="https://www.jooq.org/"/> and <ArticleLink text="Prisma" href="https://www.prisma.io/"/>. I’ve recently been making more of an effort to be more proficient with SQL without an abstraction.
+6. Learning experience was done through Databricks and their offerings
+
+## Lakehouse<a name="lakehouse"></a>
+
+I had heard of data lakes and data warehouses before but never of a <ArticleLink text="data lakehouse" href="https://www.databricks.com/glossary/data-lakehouse"/>. Databricks makes a big deal about in their fundamentals for variety of reasons. The reason which stood out the most was about trying to have an assurance of the quality of the data present at scale. Lakes and warehouses have their challenges. For example with a lake you’re able to stream a wide variety of data to your hearts content but it can be a nightmare to manage governance. Or with a warehouse you’re able to enforce a schema and have some transactional guarantees but adapting to an evolving data structure at scale is painful. Understanding how your data solution navigates these trade offs, which is fundamentally a result of the foundation it’s built upon, and what volume you’ll be working at is well worthwhile.
+
+## Medallion architecture<a name="medallion-architecture"></a>
+
+The <ArticleLink text="medallion architecture" href="https://www.databricks.com/glossary/medallion-architecture"/> was the concept which I hadn’t heard of before but benefits stood out immediately. The core concept is having different stages of data, bronze (raw), silver (cleaned) and gold (enriched), which can be used for different organisation activity. Examples of each would be:
+
+1. Bronze data is the raw data as originally ingested and the removal of PII. Metadata such as timestamps can be added here
+2. Silver data would be duplicates removed from the bronze data
+3. Gold data consists of aggregations of silver data which are then used in reports, ML training etc.
+
+It was the bronze layer which stood out in particular. Why? Because if you ever change what view of data you need, as most organisations go through, then you’re able to recreate your silver / gold layers as appropriate for you new need. This is a result of having the raw underlying data. It enables the ability to change with more ease than if you didn’t have that data available or it had already been transformed.
+
+The potentially complicated issue here is around whether that data allowed to be used in the proposed manner. Providing that is allowed then an organisations data capability is able to evolve.
+
+## Extract Load Transform (ELT) vs Extract Transform Load (ETL)<a name="extract-load-transform-elt-vs-extract-transform-load-etl"></a>
+
+I had never heard of ELT before doing the certification. I had heard of ETL. There’s an important implication in the differences between these two concepts which I had missed until revising the medaliion architecture. The same steps occur, as evident by the name, but the ordering is different. The has implications on approaches such as the Medallion architecture listed, where ideally you have all of the raw data, but there are other considerations such as governance and storage. Governance in particular is what stands out, especially as someone who is mindful of GDPR, and how although ELT would allow more flexibility there are higher risks of data being present which is sensitive. <ArticleLink href="https://www.databricks.com/discover/etl/vs-elt"/> does more of a deep dive as to why you’d want to use one over the other.
+
+## Pipelines, pipelines, pipelines...<a name="pipelines-pipelines-pipelines"></a>
+
+There can be many steps involved in transforming data from one stage to another (e.g. bronze to silver). This needs a way of being automated and handling the scenarios of intermitent errors, unexpected data quality issues, being able to easily identify why a job failed and coordination of dependencies to mention a few. Given that I quite enjoy pipeline work as an enabler of the developer experience I found the concepts around this section quite natural. I found Databrick’s pipeline offerings mapped very similarly to other tools I had used before.
+
+## Compute and scaling<a name="compute-and-scaling"></a>
+
+Givene that I’ve worked with cloud based products I didn’t find much new here for what I studied. Data transformation can involve very small sets of data to develop against but then involve very large sets in production. A way to be able to handle that scale in a time reasonable and cost effective manner is required. That by definition means some compute is required for the actual processing and ideally the ability to scale up / down depending upon the data set. Having data processed in real time is preferable from a decision making ability. I suspect if I had done <ArticleLink href=" https://www.databricks.com/learn/certification/apache-spark-developer-associate"/> I’d learned some more of the cleverness Spark does underneath the hood than what I'm aware of already. The studying I did covered the benefits of <ArticleLink href="https://www.databricks.com/product/photon"/> at a high level but that is a Databricks’ specific offering.
+
+## Data Governance<a name="data-governance"></a>
+
+I found the concerns around governance conceptually remained the same between what I’m use to and data engineering even if the details differed. The high level principle of least privilege (e.g. who actually needs access to production and for what cloud resources), concerns around auditability and being able to easily manage permissions didn’t really differ.
+
+## Notebooks, CI/CD and Testing<a name="#notebooks-cicd-and-testing"></a>
+
+I had never worked with Notebooks before. As far as iterative feedback goes they’re great. They provide the ability to co-author and debug with others. What I did find less intuiative was using these, particularly cells, as a way to break down steps of transformation. The ability to go “run this other notebook from this path” feels like it could become unweidly in terms of understanding the ordering even if Databricks Delta Live Tables (DLT) figures that out for you. But then again depending upon how you structure application code you can get the same issues and I’d be curious to work more with notebooks to see how some of what I found unituiative plays out.
+
+With that being said I did find the emphasis on being able to support CI/CD by versioning notebooks, at least with Databricks folders (repos), reassuring. While I have my own preferences around version control best practices the first step is unilaterally having stuff in version control! I’d like to have heard more about https://docs.databricks.com/en/dev-tools/bundles/index.html as part of the certification which I’ve seen some of my colleagues demonstrate.
+
+One part which wasn’t covered at all in the learning, that in part I was disappointed about, was automated testing. There was tons around quality, such as constraints in DLT which gives you the option to drop bad rows upon transformation and it is easy to identify issues, but the ability to test notebooks and source file code was absent. They do have [documentation](https://docs.databricks.com/en/notebooks/testing.html) on this but it wasn’t covered as part of the course.
+
+## Summary<a name="summary"></a>
+
+I’d do the course again knowing what I do now. I personally feel like I’ve gained enough skills that I’d be able to contribute on a data engineering project which is using Databricks. There’d still be a lot to learn depending upon the setup but I’m confident I’d be able to pick that up. Some areas I’d want hope to dig more into for my own understanding would be around testing and production CI/CD setups.
+
+What did standout as the biggest similarity between what I do day to day and data engineering was around how much focus goes into supporting evolution. My primary experience of that on a technical level is around application and architectural concerns and culturally around scaling teams and communication, ways of working, prioritising flow etc. A lot of what I saw in learning about data engineering was trying to support a different type of evolution. Whether that was around supporting an organisation’s need of how data is used, the ability to transform data or governance. In many ways that’s unsurprising - it’s one of the hardest bits of working with software.
+
+</Post>

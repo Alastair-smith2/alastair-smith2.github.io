@@ -32,6 +32,7 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
     "blog",
     "technology",
     "reflections",
+    "data-engineering",
   ];
 
   return {

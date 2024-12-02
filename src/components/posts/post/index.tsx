@@ -9,10 +9,10 @@ export default component$(() => {
 });
 
 export const ArticleLink = component$(
-  ({ href, text }: { href: string; text: string }) => {
+  ({ href, text }: { href: string; text?: string }) => {
     return (
       <a target="_blank" rel="noopener noreferrer" href={href}>
-        {text}
+        {text ? text : href}
       </a>
     );
   }

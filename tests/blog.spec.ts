@@ -19,6 +19,9 @@ test("can navigate to entry from posts list", async ({
   const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
   await expect(blogPostHeadings).toHaveCount(EXPECTED_BLOG_POST_COUNT);
 
+  const dataEngineering = page.getByText("Learning about data engineering");
+  await expect(dataEngineering).toBeVisible();
+
   const pressure = page.getByText("Thinking about pressure");
   await expect(pressure).toBeVisible();
 
