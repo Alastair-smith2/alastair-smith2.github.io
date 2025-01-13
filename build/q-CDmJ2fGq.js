@@ -1,0 +1,1 @@
+import{_ as e}from"./q-HLuFnd10.js";import{c as t,q as o}from"./q-Bay4bHT8.js";const s=t(o(()=>e(()=>import("./q-CDrEseIU.js"),[]),"s_ZDH6m7xhU0Y")),a={title:"Oops, there's nothing here",meta:[{name:"description",content:"Looks like that page doesn't exist"}]};export{s as default,a as head};
