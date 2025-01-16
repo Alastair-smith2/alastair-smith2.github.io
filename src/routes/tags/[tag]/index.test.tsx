@@ -16,6 +16,7 @@ test("It should generate relevant tags for static site", async () => {
       { tag: "technology" },
       { tag: "reflections" },
       { tag: "data-engineering" },
+      { tag: "writing" },
     ],
   });
 });
