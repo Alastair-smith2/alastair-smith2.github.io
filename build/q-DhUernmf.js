@@ -1,1 +1,0 @@
-import{L as n}from"./q-HLuFnd10.js";import{k as s,j as t,i as a}from"./q-Bay4bHT8.js";const l=e=>s(n,{class:"text-emerald-300 hover:text-emerald-700 underline",get href(){return e.href},children:t(r=>r.text,[e]),[a]:{class:a,href:t(r=>r.href,[e])}},3,"Xj_0");export{l as s_GrGqEiNIrL8};
