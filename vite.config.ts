@@ -15,58 +15,62 @@ errorOnDuplicatesPkgDeps(devDependencies, dependencies);
 export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
   const { default: rehypePrettyCode } = await import("rehype-pretty-code");
   return {
-    plugins: [ qwikCity({
-      mdxPlugins: {
-        rehypeSyntaxHighlight: false,
-        remarkGfm: true,
-        rehypeAutolinkHeadings: true,
-      },
-      mdx: {
-        rehypePlugins: [
-          [
-            rehypePrettyCode,
-            {
-              theme: "dark-plus",
-              onVisitLine(node: any) {
-                // Prevent lines from collapsing in `display: grid` mode, and
-                // allow empty lines to be copy/pasted
-                if (node.children.length === 0) {
-                  node.children = [{ type: "text", value: " " }];
-                }
-              },
-              onVisitHighlightedLine(node: any) {
-                // Each line node by default has `class="line"`.
-                node.properties.className.push("line--highlighted");
-              },
-              onVisitHighlightedWord(node: any, id: string) {
-                // Each word node has no className by default.
-                node.properties.className = ["word"];
-                if (id) {
-                  const backgroundColor = {
-                    a: "rgb(196 42 94 / 59%)",
-                    b: "rgb(0 103 163 / 56%)",
-                    c: "rgb(100 50 255 / 35%)",
-                  }[id];
-
-                  const color = {
-                    a: "rgb(255 225 225 / 100%)",
-                    b: "rgb(175 255 255 / 100%)",
-                    c: "rgb(225 200 255 / 100%)",
-                  }[id];
-                  if (node.properties["data-rehype-pretty-code-wrapper"]) {
-                    node.children.forEach((childNode: any) => {
-                      childNode.properties.style = ``;
-                      childNode.properties.className = "";
-                    });
+    plugins: [
+      qwikCity({
+        mdxPlugins: {
+          rehypeSyntaxHighlight: false,
+          remarkGfm: true,
+          rehypeAutolinkHeadings: true,
+        },
+        mdx: {
+          rehypePlugins: [
+            [
+              rehypePrettyCode,
+              {
+                theme: "dark-plus",
+                onVisitLine(node: any) {
+                  // Prevent lines from collapsing in `display: grid` mode, and
+                  // allow empty lines to be copy/pasted
+                  if (node.children.length === 0) {
+                    node.children = [{ type: "text", value: " " }];
                   }
-                  node.properties.style = `background-color: ${backgroundColor}; color: ${color};`;
-                }
+                },
+                onVisitHighlightedLine(node: any) {
+                  // Each line node by default has `class="line"`.
+                  node.properties.className.push("line--highlighted");
+                },
+                onVisitHighlightedWord(node: any, id: string) {
+                  // Each word node has no className by default.
+                  node.properties.className = ["word"];
+                  if (id) {
+                    const backgroundColor = {
+                      a: "rgb(196 42 94 / 59%)",
+                      b: "rgb(0 103 163 / 56%)",
+                      c: "rgb(100 50 255 / 35%)",
+                    }[id];
+
+                    const color = {
+                      a: "rgb(255 225 225 / 100%)",
+                      b: "rgb(175 255 255 / 100%)",
+                      c: "rgb(225 200 255 / 100%)",
+                    }[id];
+                    if (node.properties["data-rehype-pretty-code-wrapper"]) {
+                      node.children.forEach((childNode: any) => {
+                        childNode.properties.style = ``;
+                        childNode.properties.className = "";
+                      });
+                    }
+                    node.properties.style = `background-color: ${backgroundColor}; color: ${color};`;
+                  }
+                },
               },
-            },
+            ],
           ],
-        ],
-      },
-    }), qwikVite(), tsconfigPaths()],
+        },
+      }),
+      qwikVite(),
+      tsconfigPaths(),
+    ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.
@@ -108,18 +112,18 @@ export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
 
 function errorOnDuplicatesPkgDeps(
   devDependencies: PkgDep,
-  dependencies: PkgDep,
+  dependencies: PkgDep
 ) {
   let msg = "";
   // Create an array 'duplicateDeps' by filtering devDependencies.
   // If a dependency also exists in dependencies, it is considered a duplicate.
   const duplicateDeps = Object.keys(devDependencies).filter(
-    (dep) => dependencies[dep],
+    (dep) => dependencies[dep]
   );
 
   // include any known qwik packages
   const qwikPkg = Object.keys(dependencies).filter((value) =>
-    /qwik/i.test(value),
+    /qwik/i.test(value)
   );
 
   // any errors for missing "qwik-city-plan"
@@ -133,7 +137,9 @@ function errorOnDuplicatesPkgDeps(
   // Format the error message with the duplicates list.
   // The `join` function is used to represent the elements of the 'duplicateDeps' array as a comma-separated string.
   msg = `
-    Warning: The dependency "${duplicateDeps.join(", ")}" is listed in both "devDependencies" and "dependencies".
+    Warning: The dependency "${duplicateDeps.join(
+      ", "
+    )}" is listed in both "devDependencies" and "dependencies".
     Please move the duplicated dependencies to "devDependencies" only and remove it from "dependencies"
   `;
 

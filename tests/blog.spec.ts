@@ -19,7 +19,9 @@ test("can navigate to entry from posts list", async ({
   const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
   await expect(blogPostHeadings).toHaveCount(EXPECTED_TOTAL_BLOG_POST_COUNT);
 
-  const technicalWriting = page.getByText("Technical writing");
+  const technicalWriting = page.getByRole("link", {
+    name: "Technical writing",
+  });
   await expect(technicalWriting).toBeVisible();
 
   const dataEngineering = page.getByText("Learning about data engineering");

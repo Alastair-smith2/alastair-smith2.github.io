@@ -39,7 +39,9 @@ test("homepage has title and navigation links", async ({
   );
 
   const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
-  await expect(blogPostHeadings).toHaveCount(EXPECTED_HOME_PAGE_BLOG_POST_COUNT);
+  await expect(blogPostHeadings).toHaveCount(
+    EXPECTED_HOME_PAGE_BLOG_POST_COUNT
+  );
 
   const accessibilityScanResults = await makeAxeBuilder().analyze();
 
