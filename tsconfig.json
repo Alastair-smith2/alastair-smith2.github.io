@@ -4,11 +4,13 @@
     "baseUrl": ".",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
     "outDir": "tmp",
     "noEmit": true,
     "paths": {
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": [".astro/types.d.ts", "src"],
+  "exclude": ["dist"]
 }
