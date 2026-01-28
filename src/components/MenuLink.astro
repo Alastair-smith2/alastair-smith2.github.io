@@ -1,0 +1,47 @@
+---
+import type { Style } from "./MenuList.astro";
+
+interface MenuItem {
+  href: string;
+  text: string;
+}
+
+interface Props {
+  item: MenuItem;
+  style: Style;
+}
+
+const { item, style } = Astro.props;
+const currentPath = Astro.url.pathname;
+const isExternal = item.href.includes("https");
+const isActive = item.href === currentPath;
+
+const liClass = `sm:flex sm:justify-center basis-1/4 sm:basis-1/3 items-center ${
+  style === "button"
+    ? "transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
+    : ""
+}`;
+
+const linkClass = `hover:text-emerald-700 text-white p-2 ${
+  isActive ? "underline underline-offset-1" : ""
+} ${style === "button" ? "rounded-full bg-emerald-700 hover:bg-white" : ""}`;
+---
+
+<li class={liClass}>
+  {
+    isExternal ? (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        class={linkClass}
+        href={item.href}
+      >
+        {item.text}
+      </a>
+    ) : (
+      <a class={linkClass} href={item.href}>
+        {item.text}
+      </a>
+    )
+  }
+</li>

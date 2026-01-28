@@ -8,19 +8,24 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:qwik/recommended",
+    "plugin:astro/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: ["./tsconfig.json"],
     ecmaVersion: 2021,
     sourceType: "module",
-    ecmaFeatures: {
-      jsx: true,
-    },
   },
   plugins: ["@typescript-eslint"],
+  overrides: [
+    {
+      files: ["*.astro"],
+      parser: "astro-eslint-parser",
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+        extraFileExtensions: [".astro"],
+      },
+    },
+  ],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",

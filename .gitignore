@@ -1,5 +1,6 @@
 # Build
 /dist
+/.astro
 /lib
 /lib-types
 /server

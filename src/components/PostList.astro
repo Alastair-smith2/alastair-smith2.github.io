@@ -1,0 +1,31 @@
+---
+import PostLink from "./PostLink.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"posts">[];
+  limit?: number;
+}
+
+const { posts, limit } = Astro.props;
+
+const displayPosts = limit ? posts.slice(0, limit) : posts;
+---
+
+{
+  displayPosts.length === 0 ? (
+    <p class="text-white text-lg mt-6">No posts at the moment</p>
+  ) : (
+    <ul>
+      {displayPosts.map((post) => (
+        <PostLink
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          tags={post.data.tags}
+          href={`/posts/${post.slug}/`}
+        />
+      ))}
+    </ul>
+  )
+}

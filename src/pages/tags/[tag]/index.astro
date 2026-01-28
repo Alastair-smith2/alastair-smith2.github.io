@@ -1,0 +1,56 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostList from "~/components/PostList.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+
+  // Get all unique tags
+  const tags = [
+    "react-native",
+    "feature-flags",
+    "cryptography",
+    "blog",
+    "technology",
+    "reflections",
+    "data-engineering",
+    "writing",
+  ];
+
+  return tags.map((tag) => {
+    const filteredPosts = posts.filter((post) =>
+      post.data.tags.some(
+        (postTag: string) =>
+          postTag.toLowerCase().trim().replace(" ", "-") === tag.toLowerCase()
+      )
+    );
+
+    const sortedPosts = filteredPosts.sort((a, b) => {
+      const dateOrder = [
+        "January 2025",
+        "December 2024",
+        "August 2024",
+        "November 2023",
+        "May 2023",
+        "March 2023",
+      ];
+      return dateOrder.indexOf(a.data.date) - dateOrder.indexOf(b.data.date);
+    });
+
+    return {
+      params: { tag },
+      props: { posts: sortedPosts, tag },
+    };
+  });
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<BaseLayout title={`Posts tagged: ${tag}`} description={`Posts tagged: ${tag}`}>
+  <div>
+    <h2 class="text-3xl text-white">Relevant posts</h2>
+    <PostList posts={posts} />
+  </div>
+</BaseLayout>

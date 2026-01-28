@@ -1,0 +1,23 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostList from "~/components/PostList.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+const sortedPosts = posts.sort((a, b) => {
+  const dateOrder = [
+    "January 2025",
+    "December 2024",
+    "August 2024",
+    "November 2023",
+    "May 2023",
+    "March 2023",
+  ];
+  return dateOrder.indexOf(a.data.date) - dateOrder.indexOf(b.data.date);
+});
+---
+
+<BaseLayout title="Posts" description="List of posts by date">
+  <h2 class="text-3xl text-white mb-1">Blog posts</h2>
+  <PostList posts={sortedPosts} />
+</BaseLayout>

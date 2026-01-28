@@ -1,0 +1,38 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostList from "~/components/PostList.astro";
+import InternalLink from "~/components/InternalLink.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+const sortedPosts = posts.sort((a, b) => {
+  const dateOrder = [
+    "January 2025",
+    "December 2024",
+    "August 2024",
+    "November 2023",
+    "May 2023",
+    "March 2023",
+  ];
+  return dateOrder.indexOf(a.data.date) - dateOrder.indexOf(b.data.date);
+});
+---
+
+<BaseLayout
+  title="Alastair Smith's blog"
+  description="Alastair Smith's blog home page"
+>
+  <div class="mx-auto max-w-4xl">
+    <h2 class="text-3xl text-white">Welcome</h2>
+    <p class="text-white text-lg mt-6">
+      Hey, I'm <InternalLink href="/about/" text="Alastair" />. This blog will
+      mainly be about programming but will occasionally venture into other
+      spheres.
+    </p>
+    <h2 class="text-3xl text-white mt-6">Recent blogs posts</h2>
+    <PostList posts={sortedPosts} limit={4} />
+    <div class="mt-6">
+      <InternalLink text="See all posts" href="/posts/" />
+    </div>
+  </div>
+</BaseLayout>
