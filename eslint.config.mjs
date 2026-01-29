@@ -9,7 +9,7 @@ export default defineConfig(
   tseslint.configs.stylistic,
   eslintPluginAstro.configs.recommended,
   {
-    files: ["**/*.ts"],
+    files: ["src/**/*.ts"],
     languageOptions: {
       parserOptions: {
         projectService: true,

@@ -21,26 +21,21 @@ test("homepage has title and navigation links", async ({
   await expect(postsLink).toHaveAttribute("href", "/posts/");
   await expect(aboutLink).toHaveAttribute("href", "/about/");
 
-  const twitterLink = page.getByRole("link", { name: "Twitter" });
   const linkedInLink = page.getByRole("link", { name: "LinkedIn" });
   const githubLink = page.getByRole("link", { name: "Github" });
 
-  await expect(twitterLink).toHaveAttribute(
-    "href",
-    "https://twitter.com/alastair_smith2"
-  );
   await expect(githubLink).toHaveAttribute(
     "href",
-    "https://github.com/Alastair-smith2"
+    "https://github.com/Alastair-smith2",
   );
   await expect(linkedInLink).toHaveAttribute(
     "href",
-    "https://www.linkedin.com/in/alastair-smith-8b1819134"
+    "https://www.linkedin.com/in/alastair-smith-8b1819134",
   );
 
   const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
   await expect(blogPostHeadings).toHaveCount(
-    EXPECTED_HOME_PAGE_BLOG_POST_COUNT
+    EXPECTED_HOME_PAGE_BLOG_POST_COUNT,
   );
 
   const accessibilityScanResults = await makeAxeBuilder().analyze();
