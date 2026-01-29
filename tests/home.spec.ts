@@ -30,7 +30,7 @@ test("homepage has title and navigation links", async ({
   );
   await expect(linkedInLink).toHaveAttribute(
     "href",
-    "https://www.linkedin.com/in/alastair-smith-8b1819134",
+    "https://www.linkedin.com/in/alastair-smith2",
   );
 
   const blogPostHeadings = page.getByRole("heading", BLOG_POST_HEADING_LEVEL);
