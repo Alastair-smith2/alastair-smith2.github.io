@@ -4,6 +4,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import tailwindcss from "@tailwindcss/vite";
+import pagefind from "astro-pagefind";
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
@@ -48,7 +49,7 @@ const rehypePrettyCodeOptions = {
 export default defineConfig({
   site: "https://alastair-smith2.github.io",
 
-  integrations: [mdx()],
+  integrations: [mdx(), pagefind()],
 
   markdown: {
     syntaxHighlight: false,

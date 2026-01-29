@@ -46,4 +46,7 @@ test("can navigate to entry from posts list", async ({
   await expect(blogTitle).toBeVisible();
   const accessibilityScanResults = await makeAxeBuilder().analyze();
   expect(accessibilityScanResults.violations).toEqual([]);
+
+  const search = page.getByRole("search");
+  await expect(search).toBeVisible();
 });

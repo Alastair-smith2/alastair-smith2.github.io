@@ -41,4 +41,7 @@ test("homepage has title and navigation links", async ({
   const accessibilityScanResults = await makeAxeBuilder().analyze();
 
   expect(accessibilityScanResults.violations).toEqual([]);
+
+  const search = page.getByRole("search");
+  await expect(search).toBeVisible();
 });
