@@ -23,7 +23,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.0.2",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.2.2"
+    "astro": "^5.16.16"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.6.1",
