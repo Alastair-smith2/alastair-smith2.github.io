@@ -1,9 +1,9 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import tailwindcss from "@tailwindcss/vite";
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
@@ -47,10 +47,9 @@ const rehypePrettyCodeOptions = {
 
 export default defineConfig({
   site: "https://alastair-smith2.github.io",
-  integrations: [
-    tailwind(),
-    mdx(),
-  ],
+
+  integrations: [mdx()],
+
   markdown: {
     syntaxHighlight: false,
     remarkPlugins: [remarkGfm],
@@ -58,5 +57,9 @@ export default defineConfig({
       rehypeAutolinkHeadings,
       [rehypePrettyCode, rehypePrettyCodeOptions],
     ],
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });
