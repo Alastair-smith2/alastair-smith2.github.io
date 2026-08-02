@@ -29,14 +29,14 @@ At first glance people could be mistaken for thinking this post is going to be r
 
 ## <a name="trapdoor" /> What makes a suitable cryptographic algorithm? The "trapdoor" effect.
 
-Cryptography heavily relies upon various "hard" maths problems. These problems which, unless you have some secret information, can take a computer a very very long time (<ArticleLink text="in some cases trillions of years" href="https://www.quintessencelabs.com/blog/breaking-rsa-encryption-update-state-art"/>) to solve. These are <ArticleLink text="trapdoor functions" href="https://en.wikipedia.org/wiki/Trapdoor_function"/> - they make it easy to produce a result in one direction but incredibly difficult to produce the inverse without some secret information. Let's look at an algorithm and how it leverages this.
+Cryptography heavily relies upon various "hard" maths problems. These are problems which, unless you have some secret information, can take a computer a very, very long time (<ArticleLink text="in some cases trillions of years" href="https://www.quintessencelabs.com/blog/breaking-rsa-encryption-update-state-art"/>) to solve. These are <ArticleLink text="trapdoor functions" href="https://en.wikipedia.org/wiki/Trapdoor_function"/> - they make it easy to produce a result in one direction but incredibly difficult to produce the inverse without some secret information. Let's look at an algorithm and how it leverages this.
 
 ## <a name="diffie-hellman" /> Diffie-Hellman
 
 <ArticleLink
   text="Diffie-Hellman"
   href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange#"
-/> (DH) as an algorithm which paved the way for exchanging <ArticleLink
+/> (DH) is an algorithm which paved the way for exchanging <ArticleLink
   href="https://en.wikipedia.org/wiki/Key_(cryptography)"
   text="cryptographic keys"
 /> securely between parties who may never have had contact before, by establishing
@@ -69,7 +69,7 @@ Given the number 713, can you tell me what its prime factors are without using a
 
 ## <a name="ecdlp"/> Simplified overview of the Elliptic Curve Discrete Logarithm Problem
 
-This section we'll be looking at some maths involved in Elliptic Curve Cryptography (ECC). Hopefully upon completing this section you'll feel like you understand a simplified explanation of the "hard" maths problem at the core of ECC. An elliptic curve satisfies the equation y<sup>2</sup> = x<sup>3</sup> + ax + b and is symmetrical across the x-axis. For our purposes, the top right curve on the diagram below is the most helpful image.
+In this section we'll be looking at some maths involved in Elliptic Curve Cryptography (ECC). Hopefully upon completing this section you'll feel like you understand a simplified explanation of the "hard" maths problem at the core of ECC. An elliptic curve satisfies the equation y<sup>2</sup> = x<sup>3</sup> + ax + b and is symmetrical across the x-axis. For our purposes, the top right curve on the diagram below is the most helpful image.
 
 <img
   src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/EllipticCurveCatalog.svg/800px-EllipticCurveCatalog.svg.png"
@@ -86,7 +86,7 @@ find the corresponding point of the curve on the other side of the x-axis and th
 becomes C. Now we repeat the process using A and C as our two points to find where
 the next part of the graph is intercepted and flip over the x-axis again to find D. If you'd like
 to see a visual representation of this process <ArticleLink text="this video" href="https://www.youtube.com/watch?v=gAtBM06xwaw"/> is an excellent resource. This process,
-which is the adding of a point to itself, is often referred to "dotting". Formally, this is called <ArticleLink
+which is the adding of a point to itself, is often referred to as "dotting". Formally, this is called <ArticleLink
   text="Elliptic curve point multiplication"
   href="https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication"
 />
@@ -119,7 +119,7 @@ String generateReceiptURL(String baseUrl) {
 }
 ```
 
-The problem here is that if an attacker determined that a specific time was the seed for the URL then it's possible for them a) identify other receipt URLs by brute forcing time ranges and b) predict future valid URLs based on a given time. Instead, Cryptographic Pseudo-Random Number Generators (CPRNGs) are designed for these scenarios because they are not predictable in the same manner - these should be used rather than PRNGs.
+The problem here is that if an attacker determined that a specific time was the seed for the URL then it's possible for them to a) identify other receipt URLs by brute forcing time ranges and b) predict future valid URLs based on a given time. Instead, Cryptographic Pseudo-Random Number Generators (CPRNGs) are designed for these scenarios because they are not predictable in the same manner - these should be used rather than PRNGs.
 
 There are algorithms that depend upon an initialisation vector (IV) for randomness to ensure repeated words do not produce repeated cipher text as described earlier. Using an inappropriate PRNG that repeats values with these algorithms in some circumstances <ArticleLink text="can actually lead to attackers being able to determine the plaintext of a ciphertext" href="https://stackered.com/blog/iv-mishandling/"/> without the encryption key. From a security perspective this would be disastrous.
 
